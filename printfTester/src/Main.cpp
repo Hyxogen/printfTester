@@ -1,6 +1,16 @@
+#include <iostream>
 #include "AirTester.h"
 
-TEST(simple_tests, equal) {
+extern "C" {
+#include "ft_printf.h"
+}
+
+TEST(mandatory_tests, character) {
+	char correct_buffer[1024];
+	char test_buffer[1024];
+
+	std::sprintf(correct_buffer, "There are no chars in this strings!\n");
+
 	EXPECT_TRUE(true == true)
 	EXPECT_TRUE(false == true)
 	EXPECT_FALSE(false == false)

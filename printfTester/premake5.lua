@@ -10,15 +10,18 @@ project "printfTester"
 	}
 
 	includedirs {
-    	"%{prj.location}/Dependencies/Air-Tester/Air-Tester/include"
+    	"%{prj.location}/Dependencies/Air-Tester/Air-Tester/include",
+    	"%{wks.location}/../include"
     }
 
 	dependson {
-		"Air-Tester"
+		"Air-Tester",
+		"ft_printf"
 	}
 
 	links {
-		"Air-Tester"
+		"Air-Tester",
+		"ft_printf"
 	}
 
     targetdir ("%{wks.location}/bin/" .. outputdir .. "%{prj.name}")
