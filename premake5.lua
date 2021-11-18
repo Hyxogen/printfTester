@@ -7,6 +7,5 @@ workspace "Workspace"
 
 outputdir = "%{cfg.buildcfg}/%{cfg.system}/%{cfg.architecture}/"
 
-
-include "Vendor/Air-Tester/Air-Tester"
+include "printfTester/Dependencies/Air-Tester/Air-Tester"
 include "printfTester"

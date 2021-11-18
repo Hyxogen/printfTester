@@ -10,11 +10,11 @@ project "printfTester"
 	}
 
 	includedirs {
-    	"%{wks.location}/Vendor/Air-Tester/Air-Tester/include"
+    	"%{prj.location}/Dependencies/Air-Tester/Air-Tester/include"
     }
 
 	dependson {
-		"%{wks.location}/Vendor/Air-Tester/Air-Tester/"
+		"Air-Tester"
 	}
 
 	links {
