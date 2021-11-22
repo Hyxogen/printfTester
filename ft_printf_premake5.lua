@@ -9,11 +9,16 @@ project "ft_printf"
 
 	warnings "Extra"
 
+	dependson {
+		"Libft"
+	}
+
 	files {
 		"src/**.c",
 		"src/**.h"
 	}
 
 	includedirs {
-		"include"
+		"include",
+		"Dependencies/Libft"
 	}

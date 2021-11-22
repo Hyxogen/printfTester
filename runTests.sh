@@ -1,9 +1,13 @@
 PREMAKE="./Vendor/premake/bin/release/premake5"
 PREMAKE_DIR="./Vendor/premake"
-TESTPREMAKEFILE="testpremake5.lua"
+FTPRINTF_DIR=".."
+LIBFTPRINTF_DIR="$FTPRINTF_DIR/Dependencies/Libft"
+FTPRINTF_PREMAKEFILE="ft_printf_premake5.lua"
+LIBFT_PREMAKEFILE="libft_premake5.lua"
 
-git submodule update --init
-cp "$TESTPREMAKEFILE" ../premake5.lua
+#git submodule update --init
+cp "$FTPRINTF_PREMAKEFILE" "$FTPRINTF_DIR/premake5.lua"
+cp "$LIBFT_PREMAKEFILE" "$LIBFTPRINTF_DIR/premake5.lua"
 
 if [[ -f "$PREMAKE" ]]
 then

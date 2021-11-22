@@ -16,12 +16,14 @@ project "printfTester"
 
 	dependson {
 		"Air-Tester",
-		"ft_printf"
+		"ft_printf",
+		"Libft"
 	}
 
 	links {
 		"Air-Tester",
-		"ft_printf"
+		"ft_printf",
+		"Libft"
 	}
 
     targetdir ("%{wks.location}/bin/" .. outputdir .. "%{prj.name}")
