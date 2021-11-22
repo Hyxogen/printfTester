@@ -29,6 +29,28 @@ TEST(mandatory_tests, character) {
 			ft_printf("%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 'H', 'e', 'l', 'l', 'o', '!', ' ', 'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a'));
 }
 
+TEST(bonus_tests, character) {
+	EXPECT_SAME_STDOUT(std::printf("%5c", 'c'), ft_printf("%5c", 'c'));
+	EXPECT_SAME_STDOUT(std::printf("%42c", '\0'), ft_printf("%42c", '\0'));
+
+	EXPECT_SAME_STDOUT(std::printf("Hello! This is %32c", 'a'), ft_printf("Hello! This is %32c", 'a'));
+	EXPECT_SAME_STDOUT(std::printf("Hell%21c! This is a", 'o'), ft_printf("Hell%21c! This is a", 'o'));
+	EXPECT_SAME_STDOUT(std::printf("%1cello! This is a", 'H'), ft_printf("%1cello! This is a", 'H'));
+	EXPECT_SAME_STDOUT(
+						  std::printf("%1c%2c%3c%4c%5c%6c%7c%8c%9c%10c%11c%12c%13c%14c%15c%16c", 'H', 'e', 'l', 'l', 'o', '!', ' ', 'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a'),
+		ft_printf("%1c%2c%3c%4c%5c%6c%7c%8c%9c%10c%11c%12c%13c%14c%15c%16c", 'H', 'e', 'l', 'l', 'o', '!', ' ', 'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a'));
+
+	EXPECT_SAME_STDOUT(std::printf("%-5c", 'c'), ft_printf("%-5c", 'c'));
+	EXPECT_SAME_STDOUT(std::printf("%-42c", '\0'), ft_printf("%-42c", '\0'));
+
+	EXPECT_SAME_STDOUT(std::printf("Hello! This is %-32c", 'a'), ft_printf("Hello! This is %-32c", 'a'));
+	EXPECT_SAME_STDOUT(std::printf("Hell%-21c! This is a", 'o'), ft_printf("Hell%-21c! This is a", 'o'));
+	EXPECT_SAME_STDOUT(std::printf("%-1cello! This is a", 'H'), ft_printf("%-1cello! This is a", 'H'));
+	EXPECT_SAME_STDOUT(
+						  std::printf("%-1c%-2c%-3c%-4c%-5c%6c%-7c%-8c%-9c%-10c%-11c%-12c%-13c%-14c%-15c%-16c", 'H', 'e', 'l', 'l', 'o', '!', ' ', 'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a'),
+		ft_printf("%-1c%-2c%-3c%-4c%-5c%6c%-7c%-8c%-9c%-10c%-11c%-12c%-13c%-14c%-15c%-16c", 'H', 'e', 'l', 'l', 'o', '!', ' ', 'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a'));
+}
+
 TEST(mandatory_tests, string) {
 	EXPECT_SAME_STDOUT(std::printf("Hello %s", "world!"), ft_printf("Hello %s", "world!"));
 	EXPECT_SAME_STDOUT(std::printf("%s world!", "Hello"), ft_printf("%s world!", "Hello"));
