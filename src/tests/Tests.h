@@ -28,5 +28,10 @@ int	TestSingleChar(PrintfFunc_T printf1, PrintfFunc_T printf2);
 int TestCharInString(PrintfFunc_T printf1, PrintfFunc_T printf2);
 int TestCharsInString(PrintfFunc_T printf1, PrintfFunc_T printf2);
 int TestOnlyCharsString(PrintfFunc_T printf1, PrintfFunc_T printf2);
+int	TestBonusSingleChar(PrintfFunc_T printf1, PrintfFunc_T printf2);
+int TestBonusCharInString(PrintfFunc_T printf1, PrintfFunc_T printf2);
+int TestBonusCharsInString(PrintfFunc_T printf1, PrintfFunc_T printf2);
+int TestBonusOnlyCharsString(PrintfFunc_T printf1, PrintfFunc_T printf2);
+
 
 #endif //MANDATORYTESTS_H

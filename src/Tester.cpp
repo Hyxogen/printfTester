@@ -7,6 +7,10 @@ static int (*g_tests[])(PrintfFunc_T printf1, PrintfFunc_T printf2) = {
 		&TestCharInString,
 		&TestCharsInString,
 		&TestOnlyCharsString,
+		&TestBonusSingleChar,
+		&TestBonusCharInString,
+		&TestBonusCharsInString,
+		&TestBonusOnlyCharsString,
 		0
 };
 
@@ -16,8 +20,15 @@ static int RunAllTests(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 
 	index  = 0;
 	ret = 1;
-	while (g_tests[index])
-		ret *= g_tests[index++](printf1, printf2);
+	while (g_tests[index]) {
+		std::printf("Test[%d]:\n", index);
+		if (!g_tests[index](printf1, printf2)) {
+			std::printf("Failed at index: %d\n", index);
+			ret = 0;
+		}
+		std::printf("OK\n");
+		index++;
+	}
 	return ret;
 }
 

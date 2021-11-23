@@ -52,7 +52,7 @@ endif
 
 $(TARGET): $(ALL_OBJS)
 	$(SILENT)echo Linking $(TARGET)...
-	$(SILENT)$(LINK_CMD) -o $(TARGET) $(ALL_OBJS)
+	$(SILENT)$(LINK_CMD) -o $(TARGET) $(ALL_OBJS) -fsanitize=address
 	$(SILENT)echo Made $(TARGET)!
 
 $(OBJS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
