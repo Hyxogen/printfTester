@@ -30,14 +30,16 @@ int ComparePrintf(int (*printf1)(const char *, ...), int (*printf2)(const char *
 		ASSERT((stdout_copy = dup(1)) != -1)
 	}
 
-	ASSERT(setvbuf(stdout, NULL, _IONBF, 0) != EOF)
+//	ASSERT(setvbuf(stdout, NULL, _IONBF, 0) != EOF)
 	ASSERT(pipe(pipe_fds) != -1)
 	ASSERT(dup2(pipe_fds[1], 1) != -1)
 	ret1 = printf1(format, ts...);
+	fflush(stdout);
 	ASSERT((read_size = read(pipe_fds[0], &buffer1[0], BUFFER_SIZE)) >= 0)
 	buffer1[read_size] = '\0';
 
 	ret2 = printf2(format, ts...);
+	fflush(stdout);
 	ASSERT((read_size = read(pipe_fds[0], &buffer2[0], BUFFER_SIZE)) >= 0)
 	buffer2[read_size] = '\0';
 	ASSERT(dup2(stdout_copy, 1) != -1)

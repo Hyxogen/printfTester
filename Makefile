@@ -12,6 +12,8 @@ OBJS				:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 TESTS_OBJS			:= $(TESTS:$(TESTS_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 ALL_OBJS			:= $(OBJS) $(TESTS_OBJS)
 
+FT_PRINTF_DIR		:= ./..
+
 CXX					:= clang++
 CC					:= clang
 LINK_CMD			:= clang
