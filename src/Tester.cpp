@@ -1,6 +1,10 @@
 #include <iostream>
 #include "tests/Tests.h"
 
+extern "C" {
+#include "ft_printf.h"
+}
+
 static int (*g_tests[])(PrintfFunc_T printf1, PrintfFunc_T printf2) = {
 		&TestNoSpecifier,
 		&TestSingleChar,
@@ -33,7 +37,7 @@ static int RunAllTests(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 }
 
 static int RunAllTests() {
-	return RunAllTests(&std::printf, &std::printf);
+	return RunAllTests(&std::printf, &ft_printf);
 }
 
 int main(int argc, char **argv) {

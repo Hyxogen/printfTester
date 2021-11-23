@@ -13,12 +13,17 @@ TESTS_OBJS			:= $(TESTS:$(TESTS_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 ALL_OBJS			:= $(OBJS) $(TESTS_OBJS)
 
 FT_PRINTF_DIR		:= ./..
+FT_PRINTF_LIB		:= $(FT_PRINTF_DIR)/libftprintf.a
+
+LINK_DEPENDENCIES	:= $(FT_PRINTF_LIB)
+
+INLCUDE_DIRS		:= $(FT_PRINTF_DIR)/include
 
 CXX					:= clang++
 CC					:= clang
-LINK_CMD			:= clang
-ALL_CXX_FLAGS		:= -Wall -Wextra -Werror -pedantic -std=c++17
-ALL_C_FLAGS			:= -Wall -Wextra -Werror -pedantic -fsanitize=address
+LINK_CMD			:= clang++
+ALL_CXX_FLAGS		:= -Wall -Wextra -Werror -pedantic -std=c++17 -I $(INLCUDE_DIRS)
+ALL_C_FLAGS			:= -Wall -Wextra -Werror -pedantic -fsanitize=address -I $(INLCUDE_DIRS)
 
 CXX_DISTR_FLAGS 	:= -Ofast
 C_DISTR_FLAGS		:= -Ofast
@@ -46,13 +51,16 @@ debug: ALL_C_FLAGS += $(C_DEBUG_FLAGS)
 debug: $(TARGET)
 
 SILENT				:= @
-ifdef VERBOSE
+ifndef VERBOSE
 SILENT				:=
 endif
 
 $(TARGET): $(ALL_OBJS)
+	$(SILENT)echo Building $(FT_PRINTF_LIB)
+	make -C $(FT_PRINTF_DIR)
+	$(SILENT)echo Built $(FT_PRINTF_LIB)!
 	$(SILENT)echo Linking $(TARGET)...
-	$(SILENT)$(LINK_CMD) -o $(TARGET) $(ALL_OBJS) -fsanitize=address
+	$(SILENT)$(LINK_CMD) -o $(TARGET) $(LINK_DEPENDENCIES) $(ALL_OBJS) -fsanitize=address
 	$(SILENT)echo Made $(TARGET)!
 
 $(OBJS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
