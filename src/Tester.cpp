@@ -3,6 +3,9 @@
 
 static int (*g_tests[])(int (*printf1)(const char *, ...), int (*printf2)(const char *, ...)) = {
 		&SingleCharTest,
+//		&CharInString,
+//		&CharsInString,
+//		&OnlyCharsString,
 		0
 };
 

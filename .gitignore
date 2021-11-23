@@ -94,9 +94,6 @@ modules.xml
 # Sonarlint plugin
 .idea/sonarlint
 
-### premake-gmake ###
-Makefile
-*.make
 obj/
 
 ### VisualStudioCode ###
