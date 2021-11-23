@@ -44,8 +44,7 @@ int ComparePrintf(int (*printf1)(const char *, ...), int (*printf2)(const char *
 	ASSERT(close(pipe_fds[0]) != -1)
 	ASSERT(close(pipe_fds[1]) != -1)
 
-	return (ret1 == ret2);
-//	return (std::strcmp(&buffer1[0], &buffer2[0]) && ret1 == ret2);
+	return (!std::strcmp(&buffer1[0], &buffer2[0]) && ret1 == ret2);
 }
 #pragma clang diagnostic pop
 
