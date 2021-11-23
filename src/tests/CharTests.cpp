@@ -2,7 +2,6 @@
 #include "Tests.h"
 
 #define CHAR_POLES 0xFFF
-#define MAX_WIDTH 20
 
 int	TestSingleChar(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 	int	passed;
@@ -55,8 +54,12 @@ int	TestBonusSingleChar(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 	for (int i = -CHAR_POLES; i <= CHAR_POLES && passed; i++) {
 		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%1c), i);
 		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%42c), i);
-		for (int w = 0; w < MAX_WIDTH; w++)
+		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%-1c), i);
+		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%-42c), i);
+		for (int w = 0; w < MAX_WIDTH; w++) {
 			passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%*c), w, i);
+			passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%-*c), w, i);
+		}
 	}
 	return passed;
 }
@@ -68,8 +71,12 @@ int TestBonusCharInString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 	for (int i = -CHAR_POLES; i <= CHAR_POLES && passed; i++) {
 		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_HELLOWORLD(%1c), i);
 		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_LORUM(%42c), i);
-		for (int w = 0; w < MAX_WIDTH; w++)
+		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_HELLOWORLD(%-1c), i);
+		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_LORUM(%-42c), i);
+		for (int w = 0; w < MAX_WIDTH; w++) {
 			passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_LORUM(%*c), w, i);
+			passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_LORUM(%-*c), w, i);
+		}
 	}
 	return passed;
 }
@@ -85,10 +92,21 @@ int TestBonusCharsInString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%42c), i, CHAR_POLES - i);
 		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%1c), i, CHAR_POLES - i, (i % 11) + 'a');
 		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%42c), i, CHAR_POLES - i, (i % 11) + 'a');
+
+		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%-1c), i, CHAR_POLES - i);
+		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%-42c), i, CHAR_POLES - i);
+		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%-1c), i, CHAR_POLES - i);
+		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%-42c), i, CHAR_POLES - i);
+		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%-1c), i, CHAR_POLES - i, (i % 11) + 'a');
+		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%-42c), i, CHAR_POLES - i, (i % 11) + 'a');
 		for (int w = 0; w < MAX_WIDTH; w++) {
 			passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%*c), w, i, w, CHAR_POLES - i);
 			passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%*c), w, i, w, CHAR_POLES - i);
 			passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%*c), w, i, w, CHAR_POLES - i, w, (i % 11) + 'a');
+
+			passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%-*c), w, i, w, CHAR_POLES - i);
+			passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%-*c), w, i, w, CHAR_POLES - i);
+			passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%-*c), w, i, w, CHAR_POLES - i, w, (i % 11) + 'a');
 		}
 	}
 	return passed;

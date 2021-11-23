@@ -7,7 +7,7 @@ SRC_DIR				:= ./src
 TESTS_DIR			:= $(SRC_DIR)/tests
 OBJ_DIR				:= ./obj
 SRCS				:= $(SRC_DIR)/Tester.cpp
-TESTS				:= $(TESTS_DIR)/CharTests.cpp $(TESTS_DIR)/NoSpecifierTests.cpp
+TESTS				:= $(TESTS_DIR)/CharTests.cpp $(TESTS_DIR)/NoSpecifierTests.cpp $(TESTS_DIR)/StringTests.cpp
 OBJS				:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 TESTS_OBJS			:= $(TESTS:$(TESTS_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 ALL_OBJS			:= $(OBJS) $(TESTS_OBJS)
@@ -51,17 +51,19 @@ debug: ALL_C_FLAGS += $(C_DEBUG_FLAGS)
 debug: $(TARGET)
 
 SILENT				:= @
-ifndef VERBOSE
+ifdef VERBOSE
 SILENT				:=
 endif
 
-$(TARGET): $(ALL_OBJS)
-	$(SILENT)echo Building $(FT_PRINTF_LIB)
-	make -C $(FT_PRINTF_DIR)
-	$(SILENT)echo Built $(FT_PRINTF_LIB)!
+$(TARGET): $(ALL_OBJS) $(FT_PRINTF_LIB)
 	$(SILENT)echo Linking $(TARGET)...
 	$(SILENT)$(LINK_CMD) -o $(TARGET) $(LINK_DEPENDENCIES) $(ALL_OBJS) -fsanitize=address
 	$(SILENT)echo Made $(TARGET)!
+
+$(FT_PRINTF_LIB):
+	$(SILENT)echo Building $(FT_PRINTF_LIB)
+	$(SILENT)make -C $(FT_PRINTF_DIR)
+	$(SILENT)echo Built $(FT_PRINTF_LIB)!
 
 $(OBJS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(SILENT)mkdir -p $(OBJ_DIR)

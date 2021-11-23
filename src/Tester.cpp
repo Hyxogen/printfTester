@@ -6,15 +6,20 @@ extern "C" {
 }
 
 static int (*g_tests[])(PrintfFunc_T printf1, PrintfFunc_T printf2) = {
-		&TestNoSpecifier,
-		&TestSingleChar,
-		&TestCharInString,
-		&TestCharsInString,
-		&TestOnlyCharsString,
-		&TestBonusSingleChar,
-		&TestBonusCharInString,
-		&TestBonusCharsInString,
-		&TestBonusOnlyCharsString,
+//		&TestNoSpecifier,
+//		&TestSingleChar,
+//		&TestCharInString,
+//		&TestCharsInString,
+//		&TestOnlyCharsString,
+//		&TestBonusSingleChar,
+//		&TestBonusCharInString,
+//		&TestBonusCharsInString,
+//		&TestBonusOnlyCharsString,
+		&TestSingleString,
+		&TestStringInString,
+		&TestStringsInString,
+		&TestOnlyStringsString,
+		&TestBonusWidthSingleString,
 		0
 };
 
@@ -27,10 +32,10 @@ static int RunAllTests(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 	while (g_tests[index]) {
 		std::printf("Test[%d]:\n", index);
 		if (!g_tests[index](printf1, printf2)) {
-			std::printf("Failed at index: %d\n", index);
+			std::printf("KO(%d)\n", index);
 			ret = 0;
-		}
-		std::printf("OK\n");
+		} else
+			std::printf("OK\n");
 		index++;
 	}
 	return ret;
@@ -38,6 +43,7 @@ static int RunAllTests(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 
 static int RunAllTests() {
 	return RunAllTests(&std::printf, &ft_printf);
+//	return RunAllTests(&std::printf, &std::printf);
 }
 
 int main(int argc, char **argv) {

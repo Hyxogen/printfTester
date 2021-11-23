@@ -24,28 +24,31 @@ int ComparePrintf(int (*printf1)(const char *, ...), int (*printf2)(const char *
 	char		buffer2[BUFFER_SIZE + 1];
 	int			pipe_fds[2];
 	int 		ret1, ret2;
+	int 		eof;
 	size_t 		read_size;
 
 	if (!stdout_copy) {
 		ASSERT((stdout_copy = dup(1)) != -1)
 	}
 
-//	ASSERT(setvbuf(stdout, NULL, _IONBF, 0) != EOF)
+	eof = EOF;
+	ASSERT(setvbuf(stdout, NULL, _IONBF, 0) != EOF)
 	ASSERT(pipe(pipe_fds) != -1)
 	ASSERT(dup2(pipe_fds[1], 1) != -1)
 	ret1 = printf1(format, ts...);
+	write(1, &eof, 1);
 	fflush(stdout);
 	ASSERT((read_size = read(pipe_fds[0], &buffer1[0], BUFFER_SIZE)) >= 0)
 	buffer1[read_size] = '\0';
 
 	ret2 = printf2(format, ts...);
+	write(1, &eof, 1);
 	fflush(stdout);
 	ASSERT((read_size = read(pipe_fds[0], &buffer2[0], BUFFER_SIZE)) >= 0)
 	buffer2[read_size] = '\0';
 	ASSERT(dup2(stdout_copy, 1) != -1)
 	ASSERT(close(pipe_fds[0]) != -1)
 	ASSERT(close(pipe_fds[1]) != -1)
-
 	return (!std::strcmp(&buffer1[0], &buffer2[0]) && ret1 == ret2);
 }
 #pragma clang diagnostic pop
