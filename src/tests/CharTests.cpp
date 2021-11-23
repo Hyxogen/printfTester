@@ -2,7 +2,7 @@
 #include "Tests.h"
 
 
-int	SingleCharTest(int (*printf1)(const char *, ...), int (*printf2)(const char *, ...)) {
+int	TestSingleChar(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 	int	passed;
 
 	passed = 1;
@@ -11,7 +11,7 @@ int	SingleCharTest(int (*printf1)(const char *, ...), int (*printf2)(const char 
 	return passed;
 }
 
-int CharInString(int (*printf1)(const char *, ...), int (*printf2)(const char *, ...)) {
+int TestCharInString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 	int passed;
 
 	passed = 1;
@@ -20,18 +20,18 @@ int CharInString(int (*printf1)(const char *, ...), int (*printf2)(const char *,
 	return passed;
 }
 
-int CharsInString(int (*printf1)(const char *, ...), int (*printf2)(const char *, ...)) {
+int TestCharsInString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 	int passed;
 
 	passed = 1;
 	for (int i = -0xFFFF; i <= 0xFFFF && passed; i++) {
 		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%c), i, 0xFFFF - i);
-//		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%c), i, 0xFFFF - i, (i % 11) + 'a');
+		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%c), i, 0xFFFF - i, (i % 11) + 'a');
 	}
 	return passed;
 }
 
-int OnlyCharsString(int (*printf1)(const char *, ...), int (*printf2)(const char *, ...)) {
+int TestOnlyCharsString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 	int passed;
 
 	passed = 1;

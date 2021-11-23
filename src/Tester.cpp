@@ -1,15 +1,16 @@
 #include <iostream>
 #include "tests/Tests.h"
 
-static int (*g_tests[])(int (*printf1)(const char *, ...), int (*printf2)(const char *, ...)) = {
-		&SingleCharTest,
-//		&CharInString,
-//		&CharsInString,
-//		&OnlyCharsString,
+static int (*g_tests[])(PrintfFunc_T printf1, PrintfFunc_T printf2) = {
+		&TestNoSpecifier,
+		&TestSingleChar,
+		&TestCharInString,
+		&TestCharsInString,
+		&TestOnlyCharsString,
 		0
 };
 
-static int RunAllTests(int (*printf1)(const char *, ...), int (*printf2)(const char *, ...)) {
+static int RunAllTests(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 	int index;
 	int ret;
 

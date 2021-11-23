@@ -19,27 +19,28 @@
 #pragma clang diagnostic ignored "-Wformat-security"
 template<typename... Type>
 int ComparePrintf(int (*printf1)(const char *, ...), int (*printf2)(const char *, ...), const char *format, Type... ts) {
-	char	buffer1[BUFFER_SIZE + 1];
-	char	buffer2[BUFFER_SIZE + 1];
-	int		pipe_fds[2];
-	int 	temp_fd;
-	int 	ret1, ret2;
-	size_t 	read_size;
+	static int	stdout_copy = 0;
+	char		buffer1[BUFFER_SIZE + 1];
+	char		buffer2[BUFFER_SIZE + 1];
+	int			pipe_fds[2];
+	int 		ret1, ret2;
+	size_t 		read_size;
 
-	std::cerr << "test" << std::endl;
+	if (!stdout_copy) {
+		ASSERT((stdout_copy = dup(1)) != -1)
+	}
+
 	ASSERT(setvbuf(stdout, NULL, _IONBF, 0) != EOF)
 	ASSERT(pipe(pipe_fds) != -1)
-	ASSERT((temp_fd = dup(1)) != -1)
 	ASSERT(dup2(pipe_fds[1], 1) != -1)
 	ret1 = printf1(format, ts...);
-	//Errort omdat ik probeer te readen uit 1 wat niet kan, verander naar de pipe
 	ASSERT((read_size = read(pipe_fds[0], &buffer1[0], BUFFER_SIZE)) >= 0)
 	buffer1[read_size] = '\0';
 
 	ret2 = printf2(format, ts...);
 	ASSERT((read_size = read(pipe_fds[0], &buffer2[0], BUFFER_SIZE)) >= 0)
 	buffer2[read_size] = '\0';
-	ASSERT(dup2(temp_fd, 1) != -1)
+	ASSERT(dup2(stdout_copy, 1) != -1)
 	ASSERT(close(pipe_fds[0]) != -1)
 	ASSERT(close(pipe_fds[1]) != -1)
 
