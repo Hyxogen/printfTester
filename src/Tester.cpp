@@ -1,5 +1,6 @@
 #include <iostream>
 #include "tests/Tests.h"
+#include <AirTester.h>
 
 extern "C" {
 #include "ft_printf.h"
@@ -49,5 +50,6 @@ static int RunAllTests() {
 int main(int argc, char **argv) {
 	(void)argc;
 	(void)argv;
+	AirTester::GetInstance()->RunAll();
 	return !RunAllTests();
 }

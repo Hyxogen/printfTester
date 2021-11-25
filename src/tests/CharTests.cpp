@@ -1,7 +1,13 @@
 #include "../PrintfTester.h"
 #include "Tests.h"
 
+#include <AirTester.h>
+
 #define CHAR_POLES 0xFFF
+
+TEST(simples, one) {
+	EXPECT_TRUE(true);
+}
 
 int	TestSingleChar(PrintfFunc_T printf1, PrintfFunc_T printf2) {
 	int	passed;

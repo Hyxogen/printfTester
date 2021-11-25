@@ -3,6 +3,8 @@ TARGET				:= printfTester
 DEFINES				:=
 DEPENDENCIES		:=
 
+DEPENDENCIES_DIR	:= ./Dependencies
+
 SRC_DIR				:= ./src
 TESTS_DIR			:= $(SRC_DIR)/tests
 OBJ_DIR				:= ./obj
@@ -12,18 +14,22 @@ OBJS				:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 TESTS_OBJS			:= $(TESTS:$(TESTS_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 ALL_OBJS			:= $(OBJS) $(TESTS_OBJS)
 
+AIR_TESTER_DIR		:= $(DEPENDENCIES_DIR)/Air-Tester/Air-Tester
+AIR_TESTER_LIB		:= $(AIR_TESTER_DIR)/../bin/Debug/macosx/x86_64/Air-Tester/libAir-Tester.a
+AIR_TESTER_INCLUDE	:= $(AIR_TESTER_DIR)/include
+
 FT_PRINTF_DIR		:= ./..
 FT_PRINTF_LIB		:= $(FT_PRINTF_DIR)/libftprintf.a
 
-LINK_DEPENDENCIES	:= $(FT_PRINTF_LIB)
+LINK_DEPENDENCIES	:= $(FT_PRINTF_LIB) $(AIR_TESTER_LIB)
 
-INLCUDE_DIRS		:= $(FT_PRINTF_DIR)/include
+INLCUDE_DIRS		:= -I $(FT_PRINTF_DIR)/include -I $(AIR_TESTER_INCLUDE)
 
 CXX					:= clang++
 CC					:= clang
 LINK_CMD			:= clang++
-ALL_CXX_FLAGS		:= -Wall -Wextra -Werror -pedantic -std=c++17 -I $(INLCUDE_DIRS)
-ALL_C_FLAGS			:= -Wall -Wextra -Werror -pedantic -fsanitize=address -I $(INLCUDE_DIRS)
+ALL_CXX_FLAGS		:= -Wall -Wextra -Werror -pedantic -std=c++17 $(INLCUDE_DIRS)
+ALL_C_FLAGS			:= -Wall -Wextra -Werror -pedantic -fsanitize=address $(INLCUDE_DIRS)
 
 CXX_DISTR_FLAGS 	:= -Ofast
 C_DISTR_FLAGS		:= -Ofast
@@ -55,10 +61,17 @@ ifdef VERBOSE
 SILENT				:=
 endif
 
-$(TARGET): $(ALL_OBJS) $(FT_PRINTF_LIB)
+$(TARGET): $(ALL_OBJS) $(FT_PRINTF_LIB) $(AIR_TESTER_LIB)
 	$(SILENT)echo Linking $(TARGET)...
 	$(SILENT)$(LINK_CMD) -o $(TARGET) $(LINK_DEPENDENCIES) $(ALL_OBJS) -fsanitize=address
 	$(SILENT)echo Made $(TARGET)!
+
+$(AIR_TESTER_LIB):
+	$(SILENT)echo Updating Air-Tester...
+	$(SILENT)git -C $(AIR_TESTER_DIR) pull origin development
+	$(SILENT)echo Setting up Air-Tester...
+	$(SILENT)(cd ./Dependencies/Air-Tester && bash ./setup_files.sh osx)
+	$(SILENT)make -C $(AIR_TESTER_DIR)
 
 $(FT_PRINTF_LIB):
 	$(SILENT)echo Building $(FT_PRINTF_LIB)
