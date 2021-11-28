@@ -1,6 +1,7 @@
 #include "Tests.h"
 #include "../PrintfTester.h"
 #include <string>
+#include <AirTester.h>
 
 const static char *g_Strings[] = {
 		"Hello",
@@ -20,70 +21,66 @@ const static char *g_OtherStrings[] = {
 		0
 };
 
-
-int TestSingleString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int	passed;
-
-	passed = 1;
+TEST(string_tests, single_string) {
 	for (int i = 0; g_Strings[i] != 0; i++)
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%s), g_Strings[i]);
-	return passed;
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%s), g_Strings[i]));
 }
 
-int TestStringInString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int passed;
-
-	passed = 1;
+TEST(string_tests, string_in_string) {
 	for (int i = 0; g_Strings[i] != 0; i++) {
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_HELLOWORLD(%s), g_Strings[i]);
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_LORUM(%s), g_Strings[i]);
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER_HELLOWORLD(%s), g_Strings[i]));
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER_LORUM(%s), g_Strings[i]));
 	}
-	return passed;
 }
 
-int TestStringsInString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int passed;
-
-	passed = 1;
+TEST(string_tests, strings_in_string) {
 	for (int i = 0; g_Strings[i] != 0; i++) {
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%s), g_Strings[i], g_OtherStrings[i]);
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%s), g_Strings[i], g_OtherStrings[i]);
-		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%s),  g_Strings[i], g_OtherStrings[i], g_Strings[i]);
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_HELLOWORLD(%s), g_Strings[i], g_OtherStrings[i]));
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_LORUM(%s), g_Strings[i], g_OtherStrings[i]));
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_THREE_SPECIFIER_HELLOWORLD(%s),  g_Strings[i], g_OtherStrings[i], g_Strings[i]));
 	}
-	return passed;
 }
 
-int TestOnlyStringsString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int passed;
-
-	passed = 1;
+TEST(string_tests, only_strings_string) {
 	for (int i = 0; g_Strings[i] != 0; i++)
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONLY_SPECIFIER_HELLOWORLD(%s), TESTS_ONLY_SPECIFIER_HELLOWORLD_ARG(g_Strings[i]));
-	passed *= ComparePrintf(printf1, printf2, TESTS_ONLY_SPECIFIER_HELLOWORLD(%s), "H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!", "\n");
-	return passed;
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONLY_SPECIFIER_HELLOWORLD(%s), TESTS_ONLY_SPECIFIER_HELLOWORLD_ARG(g_Strings[i])));
+	EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONLY_SPECIFIER_HELLOWORLD(%s), "H", "e", "l", "l", "o", " ", "W", "o", "r", "l", "d", "!", "\n"));
 }
 
-int TestBonusWidthSingleString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int passed;
-
-	passed = 1;
+TEST(string_bonus_tests, width_single_string) {
 	for (int i = 0; g_Strings[i] != 0; i++) {
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%1s), g_Strings[i]);
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%42s), g_Strings[i]);
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%-1s), g_Strings[i]);
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%-42s), g_Strings[i]);
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%1s), g_Strings[i]));
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%42s), g_Strings[i]));
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%-1s), g_Strings[i]));
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%-42s), g_Strings[i]));
 		for (int w = 0; w < MAX_WIDTH; w++) {
-			passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%*s), w, g_Strings[i]);
-			passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%-*s), w, g_Strings[i]);
+			EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%*s), w, g_Strings[i]));
+//			EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%-*s), w, g_Strings[i]));
 		}
 	}
-	return passed;
 }
 
-int TestBonusWidthStringInString(PrintfFunc_T printf1, PrintfFunc_T printf2);
-int TestBonusWidthStringsInString(PrintfFunc_T printf1, PrintfFunc_T printf2);
-int TestBonusWidthOnlyStringsString(PrintfFunc_T printf1, PrintfFunc_T printf2);
-int TestBonusPrecSingleString(PrintfFunc_T printf1, PrintfFunc_T printf2);
-int TestBonusPrecStringInString(PrintfFunc_T printf1, PrintfFunc_T printf2);
-int TestBonusPrecStringsInString(PrintfFunc_T printf1, PrintfFunc_T printf2);
-int TestBonusPrecOnlyStringsString(PrintfFunc_T printf1, PrintfFunc_T printf2);
+//int TestBonusWidthSingleString(PrintfFunc_T TEST_PRINTF, PrintfFunc_T CORRECT_PRINTF) {
+//	int passed;
+//
+//	passed = 1;
+//	for (int i = 0; g_Strings[i] != 0; i++) {
+//		passed *= ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%1s), g_Strings[i]);
+//		passed *= ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%42s), g_Strings[i]);
+//		passed *= ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%-1s), g_Strings[i]);
+//		passed *= ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%-42s), g_Strings[i]);
+//		for (int w = 0; w < MAX_WIDTH; w++) {
+//			passed *= ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%*s), w, g_Strings[i]);
+//			passed *= ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%-*s), w, g_Strings[i]);
+//		}
+//	}
+//	return passed;
+//}
+//
+//int TestBonusWidthStringInString(PrintfFunc_T TEST_PRINTF, PrintfFunc_T CORRECT_PRINTF);
+//int TestBonusWidthStringsInString(PrintfFunc_T TEST_PRINTF, PrintfFunc_T CORRECT_PRINTF);
+//int TestBonusWidthOnlyStringsString(PrintfFunc_T TEST_PRINTF, PrintfFunc_T CORRECT_PRINTF);
+//int TestBonusPrecSingleString(PrintfFunc_T TEST_PRINTF, PrintfFunc_T CORRECT_PRINTF);
+//int TestBonusPrecStringInString(PrintfFunc_T TEST_PRINTF, PrintfFunc_T CORRECT_PRINTF);
+//int TestBonusPrecStringsInString(PrintfFunc_T TEST_PRINTF, PrintfFunc_T CORRECT_PRINTF);
+//int TestBonusPrecOnlyStringsString(PrintfFunc_T TEST_PRINTF, PrintfFunc_T CORRECT_PRINTF);

@@ -9,7 +9,8 @@ SRC_DIR				:= ./src
 TESTS_DIR			:= $(SRC_DIR)/tests
 OBJ_DIR				:= ./obj
 SRCS				:= $(SRC_DIR)/Tester.cpp
-TESTS				:= $(TESTS_DIR)/CharTests.cpp $(TESTS_DIR)/NoSpecifierTests.cpp $(TESTS_DIR)/StringTests.cpp
+TESTS				:= $(TESTS_DIR)/CharTests.cpp $(TESTS_DIR)/NoSpecifierTests.cpp $(TESTS_DIR)/StringTests.cpp \
+					$(TESTS_DIR)/Tests.cpp
 OBJS				:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 TESTS_OBJS			:= $(TESTS:$(TESTS_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 ALL_OBJS			:= $(OBJS) $(TESTS_OBJS)

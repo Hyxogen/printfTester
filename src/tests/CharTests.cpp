@@ -3,123 +3,93 @@
 
 #include <AirTester.h>
 
-#define CHAR_POLES 0xFFF
+#define CHAR_POLES 0xF
 
-TEST(simples, one) {
-	EXPECT_TRUE(true);
+TEST(char_tests, single_char) {
+	for (int i = -CHAR_POLES; i <= CHAR_POLES; i++)
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%c), i));
 }
 
-int	TestSingleChar(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int	passed;
-
-	passed = 1;
-	for (int i = -CHAR_POLES; i <= CHAR_POLES && passed; i++)
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%c), i);
-	return passed;
-}
-
-int TestCharInString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int passed;
-
-	passed = 1;
-	for (int i = -CHAR_POLES; i <= CHAR_POLES && passed; i++) {
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_HELLOWORLD(%c), i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_LORUM(%c), i);
+TEST(char_tests, char_in_string) {
+	for (int i = -CHAR_POLES; i <= CHAR_POLES; i++) {
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER_HELLOWORLD(%c), i));
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER_LORUM(%c), i));
 	}
-	return passed;
 }
 
-int TestCharsInString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int passed;
-
-	passed = 1;
-	for (int i = -CHAR_POLES; i <= CHAR_POLES && passed; i++) {
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%c), i, CHAR_POLES - i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%c), i, CHAR_POLES - i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%c), i, CHAR_POLES - i, (i % 11) + 'a');
+TEST(char_tests, chars_in_string) {
+	for (int i = -CHAR_POLES; i <= CHAR_POLES; i++) {
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_HELLOWORLD(%c), i, CHAR_POLES - i));
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_LORUM(%c), i, CHAR_POLES - i));
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_THREE_SPECIFIER_HELLOWORLD(%c), i, CHAR_POLES - i, (i % 11) + 'a'));
 	}
-	return passed;
 }
 
-int TestOnlyCharsString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int passed;
-
-	passed = 1;
-	for (int i = -CHAR_POLES; i <= CHAR_POLES && passed; i++) {
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONLY_SPECIFIER_HELLOWORLD(%c), TESTS_ONLY_SPECIFIER_HELLOWORLD_ARG(i));
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONLY_SPECIFIER_LORUM(%c), TESTS_ONLY_SPECIFIER_LORUM_ARG(i));
+TEST(char_tests, only_chars_string) {
+	for (int i = -CHAR_POLES; i <= CHAR_POLES; i++) {
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONLY_SPECIFIER_HELLOWORLD(%c), TESTS_ONLY_SPECIFIER_HELLOWORLD_ARG(i)));
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONLY_SPECIFIER_LORUM(%c), TESTS_ONLY_SPECIFIER_LORUM_ARG(i)));
 	}
-	passed *= ComparePrintf(printf1, printf2, TESTS_ONLY_SPECIFIER_HELLOWORLD(%c), 'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '!', '\n');
-	return passed;
+	EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONLY_SPECIFIER_HELLOWORLD(%c), 'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '!', '\n'));
 }
 
-int	TestBonusSingleChar(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int passed;
-
-	passed = 1;
-	for (int i = -CHAR_POLES; i <= CHAR_POLES && passed; i++) {
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%1c), i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%42c), i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%-1c), i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%-42c), i);
+TEST(char_bonus_tests, single_char) {
+	for (int i = -CHAR_POLES; i <= CHAR_POLES; i++) {
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%1c), i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%42c), i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%-1c), i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%-42c), i));
 		for (int w = 0; w < MAX_WIDTH; w++) {
-			passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%*c), w, i);
-			passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER(%-*c), w, i);
+			EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%*c), w, i));
+			EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER(%-*c), w, i));
 		}
 	}
-	return passed;
 }
 
-int TestBonusCharInString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int passed;
-
-	passed = 1;
-	for (int i = -CHAR_POLES; i <= CHAR_POLES && passed; i++) {
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_HELLOWORLD(%1c), i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_LORUM(%42c), i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_HELLOWORLD(%-1c), i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_LORUM(%-42c), i);
+TEST(char_bonus_tests, char_in_string) {
+	for (int i = -CHAR_POLES; i <= CHAR_POLES; i++) {
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER_HELLOWORLD(%1c), i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER_LORUM(%42c), i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER_HELLOWORLD(%-1c), i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER_LORUM(%-42c), i));
 		for (int w = 0; w < MAX_WIDTH; w++) {
-			passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_LORUM(%*c), w, i);
-			passed *= ComparePrintf(printf1, printf2, TESTS_ONE_SPECIFIER_LORUM(%-*c), w, i);
+			EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER_LORUM(%*c), w, i));
+			EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONE_SPECIFIER_LORUM(%-*c), w, i));
 		}
 	}
-	return passed;
 }
 
-int TestBonusCharsInString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int passed;
+TEST(char_bonus_tests, chars_in_string) {
+	for (int i = -CHAR_POLES; i <= CHAR_POLES; i++) {
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_HELLOWORLD(%1c), i, CHAR_POLES - i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_HELLOWORLD(%42c), i, CHAR_POLES - i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_LORUM(%1c), i, CHAR_POLES - i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_LORUM(%42c), i, CHAR_POLES - i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_THREE_SPECIFIER_HELLOWORLD(%1c), i, CHAR_POLES - i, (i % 11) + 'a'));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_THREE_SPECIFIER_HELLOWORLD(%42c), i, CHAR_POLES - i, (i % 11) + 'a'));
 
-	passed = 1;
-	for (int i = -CHAR_POLES; i <= CHAR_POLES && passed; i++) {
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%1c), i, CHAR_POLES - i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%42c), i, CHAR_POLES - i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%1c), i, CHAR_POLES - i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%42c), i, CHAR_POLES - i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%1c), i, CHAR_POLES - i, (i % 11) + 'a');
-		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%42c), i, CHAR_POLES - i, (i % 11) + 'a');
-
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%-1c), i, CHAR_POLES - i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%-42c), i, CHAR_POLES - i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%-1c), i, CHAR_POLES - i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%-42c), i, CHAR_POLES - i);
-		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%-1c), i, CHAR_POLES - i, (i % 11) + 'a');
-		passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%-42c), i, CHAR_POLES - i, (i % 11) + 'a');
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_HELLOWORLD(%-1c), i, CHAR_POLES - i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_HELLOWORLD(%-42c), i, CHAR_POLES - i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_LORUM(%-1c), i, CHAR_POLES - i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_LORUM(%-42c), i, CHAR_POLES - i));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_THREE_SPECIFIER_HELLOWORLD(%-1c), i, CHAR_POLES - i, (i % 11) + 'a'));
+		EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_THREE_SPECIFIER_HELLOWORLD(%-42c), i, CHAR_POLES - i, (i % 11) + 'a'));
 		for (int w = 0; w < MAX_WIDTH; w++) {
-			passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%*c), w, i, w, CHAR_POLES - i);
-			passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%*c), w, i, w, CHAR_POLES - i);
-			passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%*c), w, i, w, CHAR_POLES - i, w, (i % 11) + 'a');
+			EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_HELLOWORLD(%*c), w, i, w, CHAR_POLES - i));
+			EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_LORUM(%*c), w, i, w, CHAR_POLES - i));
+			EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_THREE_SPECIFIER_HELLOWORLD(%*c), w, i, w, CHAR_POLES - i, w, (i % 11) + 'a'));
 
-			passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_HELLOWORLD(%-*c), w, i, w, CHAR_POLES - i);
-			passed *= ComparePrintf(printf1, printf2, TESTS_TWO_SPECIFIER_LORUM(%-*c), w, i, w, CHAR_POLES - i);
-			passed *= ComparePrintf(printf1, printf2, TESTS_THREE_SPECIFIER_HELLOWORLD(%-*c), w, i, w, CHAR_POLES - i, w, (i % 11) + 'a');
+			EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_HELLOWORLD(%-*c), w, i, w, CHAR_POLES - i));
+			EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_TWO_SPECIFIER_LORUM(%-*c), w, i, w, CHAR_POLES - i));
+			EXPECT_TRUE( ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_THREE_SPECIFIER_HELLOWORLD(%-*c), w, i, w, CHAR_POLES - i, w, (i % 11) + 'a'));
 		}
 	}
-	return passed;
 }
 
-int TestBonusOnlyCharsString(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	(void)printf1;
-	(void)printf2;
-	return true;
+TEST(char_bonus_tests, only_chars_string) {
+	for (int i = -CHAR_POLES; i <= CHAR_POLES; i++) {
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONLY_SPECIFIER_HELLOWORLD(%1c), TESTS_ONLY_SPECIFIER_HELLOWORLD_ARG(i)));
+		EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONLY_SPECIFIER_HELLOWORLD(%-1c), TESTS_ONLY_SPECIFIER_HELLOWORLD_ARG(i)));
+	}
+	EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_ONLY_SPECIFIER_HELLOWORLD(%42c), 'H', 'e', 'l', 'l', 'o', ' ', 'W', 'o', 'r', 'l', 'd', '!', '\n'));
 }

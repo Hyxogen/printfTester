@@ -1,11 +1,8 @@
 #include "Tests.h"
 #include "../PrintfTester.h"
+#include <AirTester.h>
 
-int TestNoSpecifier(PrintfFunc_T printf1, PrintfFunc_T printf2) {
-	int	passed;
-
-	passed = 1;
-	passed *= ComparePrintf(printf1, printf2, TESTS_NO_SPECIFIER_HELLOWORLD());
-	passed *= ComparePrintf(printf1, printf2, TESTS_NO_SPECIFIER_LORUM());
-	return passed;
+TEST(specifier_tests, all) {
+	EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_NO_SPECIFIER_HELLOWORLD()));
+	EXPECT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, TESTS_NO_SPECIFIER_LORUM()));
 }
