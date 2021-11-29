@@ -2,6 +2,11 @@
 #include <string>
 #include <vector>
 
+#define DISABLE_STRING_TEST
+
+#ifdef DISABLE_STRING_TEST
+
+#else
 static const std::vector<const char*>& GetTestVector() {
 	static std::vector<const char*> vec = {
 			"Hello",
@@ -16,4 +21,5 @@ static const std::vector<const char*>& GetTestVector() {
 
 ALL_MANDATORY_TESTS(string, "s", GetTestVector())
 ALL_BONUS_TESTS(string, "s", GetTestVector())
+#endif
 //MANDATORY_ONLY_SPECIFIERS_IN_STRING_(string, "s", GetTestVector())
