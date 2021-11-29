@@ -15,6 +15,25 @@
  * mandatory en bonus checks maken voor char string en signed int
  */
 
+template<typename Type>
+void DebugPrintValues(int i, Type t) {
+	std::cerr << "val:" << i << std::endl;
+	std::cerr << t << std::endl;
+	std::cerr << "Last value" << std::endl;
+}
+
+template<typename Type, typename... Types>
+void DebugPrintValues(int i, Type t, Types... ts) {
+	std::cerr << "val:" << i << std::endl;
+	std::cerr << t << std::endl;
+	DebugPrintValues(i + 1, ts...);
+}
+
+template<typename... Types>
+void DebugPrintValues(int i, Types... ts) {
+	DebugPrintValues(i, ts...);
+}
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wformat-security"
 template<typename... Type>
@@ -60,6 +79,7 @@ int ComparePrintf(int (*printf1)(const char *, ...), int (*printf2)(const char *
 	std::cerr << &buffer1[0] << std::endl;
 	std::cerr << "Printf2 result:" << std::endl;
 	std::cerr << &buffer2[0] << std::endl;
+	DebugPrintValues(1, ts...);
 	std::cerr << "--------------------------------------------" << std::endl << std::endl;
 
 	return (0);
