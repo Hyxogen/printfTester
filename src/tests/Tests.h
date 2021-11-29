@@ -181,20 +181,20 @@ BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, , nflag, 
 BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
 
 #define ALL_MANDATORY_TESTS(specifier_name, specifier, collection)														\
-MANDATORY_SINGLE_SPECIFIER_(specifier_name, specifier, GetTestVector())													\
-MANDATORY_SPECIFIER_IN_STRING_(specifier_name, specifier, GetTestVector())												\
-MANDATORY_SPECIFIERS_IN_STRING_(specifier_name, specifier, GetTestVector())
+MANDATORY_SINGLE_SPECIFIER_(specifier_name, specifier, collection)													\
+MANDATORY_SPECIFIER_IN_STRING_(specifier_name, specifier, collection)												\
+MANDATORY_SPECIFIERS_IN_STRING_(specifier_name, specifier, collection)
 //MANDATORY_ONLY_SPECIFIERS_IN_STRING_(specifier_name, specifier, GetTestVector())
 
 #define ALL_BONUS_TESTS(specifier_name, specifier, collection)															\
-BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_(specifier_name, specifier, GetTestVector())										\
-BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_(specifier_name, specifier, GetTestVector())										\
-BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_(specifier_name, specifier, GetTestVector())										\
-BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_(specifier_name, specifier, GetTestVector())										\
-BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_(specifier_name, specifier, GetTestVector())										\
-BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_(specifier_name, specifier, GetTestVector())										\
-BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_(specifier_name, specifier, GetTestVector())										\
-BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_(specifier_name, specifier, GetTestVector())
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_(specifier_name, specifier, collection)
 
 typedef int (*PrintfFunc_T)(const char *, ...);
 
