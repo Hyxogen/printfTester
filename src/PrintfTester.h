@@ -53,4 +53,6 @@ int ComparePrintf(int (*printf1)(const char *, ...), int (*printf2)(const char *
 }
 #pragma clang diagnostic pop
 
+/*
+*/
 #endif //PRINTFTESTER_H
