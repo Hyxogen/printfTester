@@ -88,15 +88,7 @@ TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_nwidth
 BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
 
 #define BONUS_SINGLE_SPECIFIER_NWIDTH_VSPEC_(specifier_name, specifier, collection)										\
-TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_nwidth_vspec_test) {							\
-	for (auto val : collection) {																						\
-		for (int p = 0; p < MAX_PREC; p++) {																			\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(".*" specifier), p, val);												\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(".*" specifier), p, val);												\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(".*" specifier), p, val);												\
-        }																												\
-	}																													\
-}
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
 
 #define BONUS_SINGLE_SPECIFIER_FWIDTH_NSPEC_(specifier_name, specifier, collection)										\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_fwdith_nspec_test) {							\
