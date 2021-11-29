@@ -49,6 +49,20 @@ int ComparePrintf(int (*printf1)(const char *, ...), int (*printf2)(const char *
 	ASSERT(dup2(stdout_copy, 1) != -1)
 	ASSERT(close(pipe_fds[0]) != -1)
 	ASSERT(close(pipe_fds[1]) != -1)
+	if (!std::strcmp(&buffer1[0], &buffer2[0]) && ret1 == ret2)
+		return (1);
+	
+	std::cerr << "--------------------------------------------" << std::endl;
+	std::cerr << "Comparison of printf failed" << std::endl;
+	std::cerr << "Format string: \"" << format << "\"" << std::endl;
+	std::cerr << "Return values: printf1:" << ret1 << " printf2:" << ret2 << std::endl;
+	std::cerr << "Printf1 result:" << std::endl;
+	std::cerr << &buffer1[0] << std::endl;
+	std::cerr << "Printf2 result:" << std::endl;
+	std::cerr << &buffer2[0] << std::endl;
+	std::cerr << "--------------------------------------------" << std::endl << std::endl;
+
+	return (0);
 	return (!std::strcmp(&buffer1[0], &buffer2[0]) && ret1 == ret2);
 }
 #pragma clang diagnostic pop
