@@ -306,7 +306,7 @@ TEST(TESTER_GROUP_NAME_(bonus##specifier_name), two_string##specifier_name##_nwi
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, , ".42", specifier, val, val);                          					\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_LORUM, flag, , ".1", specifier, val, val);										\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_LORUM, flag, , ".21", specifier, val, val);											\
-		GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_LORUM, flag, , ".42", specifier, val, val);                          					\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_LORUM, flag, , ".42", specifier, val);                          					\
 	}																													\
 }
 
