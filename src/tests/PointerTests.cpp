@@ -9,11 +9,11 @@
 #define UINT_POLES 0x7F
 // #define DISABLE_CHAR_TEST
 
-#ifdef DISABLE_SINT_TEST
+#ifdef DISABLE_POINTER_TEST
 
 #else
-static const std::vector<unsigned int>& GetTestVector() {
-	static std::vector<unsigned int> vec;
+static const std::vector<int>& GetTestVector() {
+	static std::vector<int> vec;
 	if (vec.empty()) {
 		for (int i = -UINT_POLES; i < UINT_POLES; i++)
 			vec.push_back(i);

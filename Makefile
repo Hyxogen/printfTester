@@ -24,7 +24,7 @@ FT_PRINTF_LIB		:= $(FT_PRINTF_DIR)/libftprintf.a
 
 LINK_DEPENDENCIES	:= $(FT_PRINTF_LIB) $(AIR_TESTER_LIB)
 
-INLCUDE_DIRS		:= -I $(FT_PRINTF_DIR)/include -I $(AIR_TESTER_INCLUDE)
+INLCUDE_DIRS		:= -I $(FT_PRINTF_DIR)/include -I $(AIR_TESTER_INCLUDE) -I $(FT_PRINTF_DIR)
 
 CXX					:= clang++
 CC					:= clang
