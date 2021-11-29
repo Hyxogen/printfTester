@@ -64,60 +64,72 @@ TEST(TESTER_GROUP_NAME_(specifier_name), only_##specifier_name##s_in_string_test
 	}																													\
 }
 
+#define GENERIC_SINGLE_TEST_FORMAT_(format, flag, width, prec, specifier, ...)\
+TEST_PRINTF_FUNC(format(flag width prec specifier), __VA_ARGS__)
+
+#define GENERIC_TEST_SINGLE_VPREC_(format, flag, width, specifier, collection)\
+for (auto val : collection) {										\
+	for (int p = 0; p < MAX_PREC; p++) {							\
+		GENERIC_SINGLE_TEST_FORMAT_(format, flag, width, ".*", specifier, p, val);\
+    }																		\
+}																			
+
+#define GENERIC_SINGLE_TEST_VWIDTH_(format, flag, prec, specifier, collection)\
+for (auto val : collection) {										\
+	for (int w = 0; w < MAX_WIDTH; w++) {							\
+		GENERIC_SINGLE_TEST_FORMAT_(format, flag, "*", prec, specifier, w, val);\
+    }																		\
+}	
+
+#define GENERIC_SINGLE_TEST_VWIDTH_VPREC_(format, flag, specifier, collection)\
+for (auto val : collection) {										\
+	for (int w = 0; w < MAX_WIDTH; w++) {							\
+		for (int p = 0; p < MAX_PREC; p++) {							\
+			GENERIC_SINGLE_TEST_FORMAT_(format, flag, "*", ".*", specifier, w, p, val);\
+    	}	\
+    }\
+}
+
 #define BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_nwidth_fspec_##flag_name##_test) {			\
 	for (auto val : collection) {																						\
-		TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag ".1" specifier), val);												\
-		TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag ".21" specifier), val);												\
-		TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag ".42" specifier), val);                           					\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, , ".1", specifier, val);										\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, , ".21", specifier, val);											\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, , ".42", specifier, val);                          					\
 	}																													\
 }
 
 #define BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_nwidth_vspec_##flag_name##_test) {			\
-	for (auto val : collection) {																						\
-		for (int p = 0; p < MAX_PREC; p++) {																			\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag ".*" specifier), p, val);											\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag ".*" specifier), p, val);											\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag ".*" specifier), p, val);											\
-        }																												\
-	}																													\
+	GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER, flag, , specifier, collection);											\
 }
 
 #define BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_fwidth_nspec_##flag_name##_test) {			\
 	for (auto val : collection) {																						\
-		for (int p = 0; p < MAX_PREC; p++) {																			\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "1" specifier), p, val);											\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "21" specifier), p, val);											\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "42" specifier), p, val);											\
-        }																												\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "1", , specifier, val);											\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "21", , specifier, val);											\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "42", , specifier, val);											\
 	}																													\
 }
-
+//#define GENERIC_SINGLE_TEST_VWIDTH_(format, flag, prec, specifier, collection)
 #define BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_vwidth_nspec_##flag_name##_test) {			\
-	for (auto val : collection) {																						\
-		for (int w = 0; w < MAX_WIDTH; w++) {																			\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "*" specifier), w, val);											\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "*" specifier), w, val);											\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "*" specifier), w, val);											\
-        }																												\
-	}																													\
+	GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER, flag, , specifier, collection);									\
 }
 
 #define BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_fwidth_fspec_##flag_name##_test) {			\
 	for (auto val : collection) {																						\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "1.1" specifier), val);												\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "1.21" specifier), val);												\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "1.42" specifier), val);												\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "21.1" specifier), val);												\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "21.21" specifier), val);												\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "21.42" specifier), val);												\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "42.1" specifier), val);												\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "42.21" specifier), val);												\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "42.42" specifier), val);												\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "1", ".1", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "1", ".21", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "1", ".42", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "21", ".1", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "21", ".21", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "21", ".42", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "42", ".1", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "42", ".21", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "42", ".42", specifier, val);							\
 	}																													\
 }
 
@@ -134,26 +146,14 @@ TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_fwidth
 
 #define BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_vwidth_fspec_##flag_name##_test) {							\
-	for (auto val : collection) {																						\
-		for (int p = 0; p < MAX_PREC; p++) {																			\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "*.1" specifier), p, val);												\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "*.21" specifier), p, val);											\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "*.42" specifier), p, val);											\
-		}																												\
-	}																													\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER, flag, ".1", specifier, collection);									\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER, flag, ".21", specifier, collection);									\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER, flag, ".42", specifier, collection);									\
 }
 
 #define BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_vwidth_vspec_##flag_name##_test) {							\
-	for (auto val : collection) {																						\
-		for (int p = 0; p < MAX_PREC; p++) {																			\
-			for (int w = 0; w < MAX_WIDTH; w++) {																		\
-				TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "*.*" specifier), w, p, val);										\
-				TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "*.*" specifier), w, p, val);										\
-				TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "*.*" specifier), w, p, val);										\
-			}																											\
-		}																												\
-	}																													\
+GENERIC_SINGLE_TEST_VWIDTH_VPREC_(TESTS_ONE_SPECIFIER, flag, specifier, collection);									\
 }
 
 #define BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_(specifier_name, specifier, collection)										\
@@ -186,7 +186,44 @@ MANDATORY_SPECIFIER_IN_STRING_(specifier_name, specifier, collection)											
 MANDATORY_SPECIFIERS_IN_STRING_(specifier_name, specifier, collection)
 //MANDATORY_ONLY_SPECIFIERS_IN_STRING_(specifier_name, specifier, GetTestVector())
 
+#define BONUS_SINGLE_SPECIFIER_WIDTH_TESTS(specifier_name, specifier, collection)\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)
+
+#define BONUS_ALL_WIDTH_TESTS(specifier_name, specifier, collection)\
+BONUS_SINGLE_SPECIFIER_WIDTH_TESTS(specifier_name, specifier, collection)
+
+#define BONUS_SINGLE_SPECIFIER_PREC_TESTS(specifier_name, specifier, collection)\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)
+
+#define BONUS_ALL_PREC_TESTS(specifier_name, specifier, collection)\
+BONUS_SINGLE_SPECIFIER_PREC_TESTS(specifier_name, specifier, collection)
+
 #define ALL_BONUS_TESTS(specifier_name, specifier, collection)															\
+BONUS_ALL_WIDTH_TESTS(specifier_name, specifier, collection)															\
+BONUS_ALL_PREC_TESTS(specifier_name, specifier, collection)
+/*
 BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_(specifier_name, specifier, collection)										\
 BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_(specifier_name, specifier, collection)										\
 BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_(specifier_name, specifier, collection)										\
@@ -196,6 +233,7 @@ BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_(specifier_name, specifier, collection)					
 BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_(specifier_name, specifier, collection)										\
 BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_(specifier_name, specifier, collection)
 
+*/
 typedef int (*PrintfFunc_T)(const char *, ...);
 
 PrintfFunc_T GetTestFunction();

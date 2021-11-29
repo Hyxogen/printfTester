@@ -20,6 +20,7 @@ static const std::vector<int>& GetTestVector() {
 	return vec;
 }
 
-ALL_MANDATORY_TESTS(char, "c", GetTestVector())
+// ALL_MANDATORY_TESTS(char, "c", GetTestVector())
 ALL_BONUS_TESTS(char, "c", GetTestVector())
+// GENERIC_SINGLE_SPECIFIER_TEST_(bonus, char, "c",, nflag,, nwidth, ".1", ofprec, GetTestVector())
 #endif
