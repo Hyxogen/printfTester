@@ -64,14 +64,28 @@ TEST(TESTER_GROUP_NAME_(specifier_name), only_##specifier_name##s_in_string_test
 	}																													\
 }
 
-#define BONUS_SINGLE_SPECIFIER_NWIDTH_FSPEC_(specifier_name, specifier, collection)										\
-TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_nwidth_fspec_test) {							\
+#define BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
+TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_nwidth_fspec_##flag_name##_test) {			\
 	for (auto val : collection) {																						\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(".1" specifier), val);														\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(".21" specifier), val);													\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(".42" specifier), val);                            						\
+		TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "1" specifier), val);													\
+		TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "21" specifier), val);												\
+		TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "42" specifier), val);                           						\
 	}																													\
 }
+
+#define BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
+TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_nwidth_vspec_##flag_name##_test) {			\
+	for (auto val : collection) {																						\
+		for (int p = 0; p < MAX_PREC; p++) {																			\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag ".*" specifier), p, val);												\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag ".*" specifier), p, val);												\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag ".*" specifier), p, val);												\
+        }																												\
+	}																													\
+}
+
+#define BONUS_SINGLE_SPECIFIER_NWIDTH_FSPEC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
 
 #define BONUS_SINGLE_SPECIFIER_NWIDTH_VSPEC_(specifier_name, specifier, collection)										\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_nwidth_vspec_test) {							\
