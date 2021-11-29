@@ -364,26 +364,22 @@ TEST(TESTER_GROUP_NAME_(bonus##specifier_name), two_string##specifier_name##_fwi
 
 #define BONUS_TWO_SPECIFIER_STRING_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), two_string##specifier_name##_fwidth_vspec_##flag_name##_test) {							\
-	for (auto val : collection) {																						\
-		for (int p = 0; p < MAX_PREC; p++) {\
-			GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, "1", ".*", specifier, val, val)					\
-			GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, "21", ".*", specifier, val, val)					\
-			GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, "42", ".*", specifier, val, val)					\
-			GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, "1", ".*", specifier, val, val)					\
-			GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, "21", ".*", specifier, val, val)					\
-			GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, "42", ".*", specifier, val, val)					\
-		}																												\
-	}																													\
+	GENERIC_TEST_TWO_VPREC_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, "1", specifier, collection);									\
+	GENERIC_TEST_TWO_VPREC_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, "21", specifier, collection);									\
+	GENERIC_TEST_TWO_VPREC_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, "42", specifier, collection);									\
+	GENERIC_TEST_TWO_VPREC_(TESTS_TWO_SPECIFIER_LORUM, flag, "1", specifier, collection);									\
+	GENERIC_TEST_TWO_VPREC_(TESTS_TWO_SPECIFIER_LORUM, flag, "21", specifier, collection);									\
+	GENERIC_TEST_TWO_VPREC_(TESTS_TWO_SPECIFIER_LORUM, flag, "42", specifier, collection);									\
 }
 
 #define BONUS_TWO_SPECIFIER_STRING_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), two_string##specifier_name##_vwidth_fspec_##flag_name##_test) {							\
-GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, ".1", specifier, collection);									\
-GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, ".21", specifier, collection);									\
-GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, ".42", specifier, collection);									\
-GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_LORUM, flag, ".1", specifier, collection);									\
-GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_LORUM, flag, ".21", specifier, collection);									\
-GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_LORUM, flag, ".42", specifier, collection);									\
+	GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, ".1", specifier, collection);									\
+	GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, ".21", specifier, collection);									\
+	GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, ".42", specifier, collection);									\
+	GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_LORUM, flag, ".1", specifier, collection);									\
+	GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_LORUM, flag, ".21", specifier, collection);									\
+	GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_LORUM, flag, ".42", specifier, collection);									\
 }
 
 #define BONUS_TWO_SPECIFIER_STRING_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\

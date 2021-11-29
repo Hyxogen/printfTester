@@ -6,7 +6,7 @@
 #include <iostream>
 #include "utils/Assert.h"
 
-#define BUFFER_SIZE 4096
+#define BUFFER_SIZE 40960
 /*
  * TODO
  * test functie voor printf afmaken
