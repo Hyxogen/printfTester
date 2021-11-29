@@ -220,18 +220,47 @@ BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "0", zfla
 #define BONUS_ALL_PREC_TESTS(specifier_name, specifier, collection)\
 BONUS_SINGLE_SPECIFIER_PREC_TESTS(specifier_name, specifier, collection)
 
+#define BONUS_SINGLE_SPECIFIER_MIXED_TESTS(specifier_name, specifier, collection)\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_(specifier_name, specifier, collection)										\
+\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)										\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)										\
+\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "p", pflag, collection)										\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "p", pflag, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "p", pflag, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "p", pflag, collection)										\
+\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)										\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)										\
+\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)										\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)										\
+\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)										\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)										\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)										
+
 #define ALL_BONUS_TESTS(specifier_name, specifier, collection)															\
 BONUS_ALL_WIDTH_TESTS(specifier_name, specifier, collection)															\
-BONUS_ALL_PREC_TESTS(specifier_name, specifier, collection)
+BONUS_ALL_PREC_TESTS(specifier_name, specifier, collection)																\
+
 /*
 BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_(specifier_name, specifier, collection)										\
 BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_(specifier_name, specifier, collection)										\
 BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_(specifier_name, specifier, collection)										\
 BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_(specifier_name, specifier, collection)										\
-BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_(specifier_name, specifier, collection)										\
-BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_(specifier_name, specifier, collection)										\
-BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_(specifier_name, specifier, collection)										\
-BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_(specifier_name, specifier, collection)
+
 
 */
 typedef int (*PrintfFunc_T)(const char *, ...);
