@@ -266,16 +266,12 @@ TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_
 
 #define BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_fwidth_vspec_##flag_name##_test) {							\
-	for (auto val : collection) {																						\
-		for (int p = 0; p < MAX_PREC; p++) {																			\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_HELLOWORLD(flag "1.*" specifier), p, val);												\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_HELLOWORLD(flag "21.*" specifier), p, val);											\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_HELLOWORLD(flag "42.*" specifier), p, val);											\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_LORUM(flag "1.*" specifier), p, val);												\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_LORUM(flag "21.*" specifier), p, val);											\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_LORUM(flag "42.*" specifier), p, val);											\
-		}																												\
-	}																													\
+GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", specifier, collection);									\
+GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", specifier, collection);									\
+GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", specifier, collection);									\
+GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", specifier, collection);									\
+GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", specifier, collection);									\
+GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", specifier, collection);\
 }
 
 #define BONUS_SINGLE_SPECIFIER_STRING_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
