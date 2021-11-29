@@ -180,90 +180,95 @@ GENERIC_SINGLE_TEST_VWIDTH_VPREC_(TESTS_ONE_SPECIFIER, flag, specifier, collecti
  * SINGLE SPECIFIER IN FORMAT STRING TESTS GENERIC FLAG
  * 
  */
-// #define BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
-// TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_nwidth_fspec_##flag_name##_test) {			\
-// 	for (auto val : collection) {																						\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , ".1", specifier, val);										\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , ".21", specifier, val);											\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , ".42", specifier, val);                          					\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, , ".1", specifier, val);										\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, , ".21", specifier, val);											\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, , ".42", specifier, val);                          					\
-// 	}																													\
-// }
+#define BONUS_SINGLE_SPECIFIER_STRING_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
+TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_nwidth_fspec_##flag_name##_test) {			\
+	for (auto val : collection) {																						\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , ".1", specifier, val);										\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , ".21", specifier, val);											\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , ".42", specifier, val);                          					\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, , ".1", specifier, val);										\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, , ".21", specifier, val);											\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, , ".42", specifier, val);                          					\
+	}																													\
+}
 
-// #define BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
-// TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_nwidth_vspec_##flag_name##_test) {			\
-// 	GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , specifier, collection);											\
-// 	GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER_LORUM, flag, , specifier, collection);											\
-// }
+#define BONUS_SINGLE_SPECIFIER_STRING_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
+TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_nwidth_vspec_##flag_name##_test) {			\
+	GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , specifier, collection);											\
+	GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER_LORUM, flag, , specifier, collection);											\
+}
 
-// #define BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
-// TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_fwidth_nspec_##flag_name##_test) {			\
-// 	for (auto val : collection) {																						\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", , specifier, val);											\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", , specifier, val);											\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", , specifier, val);											\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", , specifier, val);											\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", , specifier, val);											\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", , specifier, val);											\
-	
-// 	}																													\
-// }
-// //#define GENERIC_SINGLE_TEST_VWIDTH_(format, flag, prec, specifier, collection)
-// #define BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
-// TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_vwidth_nspec_##flag_name##_test) {			\
-// 	GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , specifier, collection);									\
-// 	GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_LORUM, flag, , specifier, collection);									\
-// }
+#define BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
+TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_fwidth_nspec_##flag_name##_test) {			\
+	for (auto val : collection) {																						\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", , specifier, val);											\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", , specifier, val);											\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", , specifier, val);											\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", , specifier, val);											\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", , specifier, val);											\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", , specifier, val);											\
+	}																													\
+}
+//#define GENERIC_SINGLE_TEST_VWIDTH_(format, flag, prec, specifier, collection)
+#define BONUS_SINGLE_SPECIFIER_STRING_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
+TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_vwidth_nspec_##flag_name##_test) {			\
+	GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , specifier, collection);									\
+	GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_LORUM, flag, , specifier, collection);									\
+}
 
-// #define BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
-// TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_fwidth_fspec_##flag_name##_test) {			\
-// 	for (auto val : collection) {																						\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", ".1", specifier, val);								\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", ".21", specifier, val);								\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", ".42", specifier, val);								\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", ".1", specifier, val);								\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", ".21", specifier, val);							\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", ".42", specifier, val);							\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", ".1", specifier, val);								\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", ".21", specifier, val);							\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", ".42", specifier, val);							\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", ".1", specifier, val);								\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", ".21", specifier, val);								\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", ".42", specifier, val);								\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", ".1", specifier, val);								\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", ".21", specifier, val);							\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", ".42", specifier, val);							\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", ".1", specifier, val);								\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", ".21", specifier, val);							\
-// 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", ".42", specifier, val);							\
-	
-// 	}																													\
-// }
+#define BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
+TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_fwidth_fspec_##flag_name##_test) {			\
+	for (auto val : collection) {																						\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", ".1", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", ".21", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", ".42", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", ".1", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", ".21", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", ".42", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", ".1", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", ".21", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", ".42", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", ".1", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", ".21", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", ".42", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", ".1", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", ".21", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", ".42", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", ".1", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", ".21", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", ".42", specifier, val);							\
+	}																													\
+}
 
-// #define BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
-// TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_fwidth_vspec_##flag_name##_test) {							\
-// 	for (auto val : collection) {																						\
-// 		for (int p = 0; p < MAX_PREC; p++) {																			\
-// 			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "1.*" specifier), p, val);												\
-// 			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "21.*" specifier), p, val);											\
-// 			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "42.*" specifier), p, val);											\
-// 		}																												\
-// 	}																													\
-// }
+#define BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
+TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_fwidth_vspec_##flag_name##_test) {							\
+	for (auto val : collection) {																						\
+		for (int p = 0; p < MAX_PREC; p++) {																			\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_HELLOWORLD(flag "1.*" specifier), p, val);												\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_HELLOWORLD(flag "21.*" specifier), p, val);											\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_HELLOWORLD(flag "42.*" specifier), p, val);											\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_LORUM(flag "1.*" specifier), p, val);												\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_LORUM(flag "21.*" specifier), p, val);											\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER_LORUM(flag "42.*" specifier), p, val);											\
+		}																												\
+	}																													\
+}
 
-// #define BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
-// TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_vwidth_fspec_##flag_name##_test) {							\
-// GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER, flag, ".1", specifier, collection);									\
-// GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER, flag, ".21", specifier, collection);									\
-// GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER, flag, ".42", specifier, collection);									\
-// }
+#define BONUS_SINGLE_SPECIFIER_STRING_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
+TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_vwidth_fspec_##flag_name##_test) {							\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, ".1", specifier, collection);									\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, ".21", specifier, collection);									\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, ".42", specifier, collection);									\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_LORUM, flag, ".1", specifier, collection);									\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_LORUM, flag, ".21", specifier, collection);									\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_LORUM, flag, ".42", specifier, collection);									\
+}
 
-// #define BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
-// TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_vwidth_vspec_##flag_name##_test) {							\
-// GENERIC_SINGLE_TEST_VWIDTH_VPREC_(TESTS_ONE_SPECIFIER, flag, specifier, collection);									\
-// }
+#define BONUS_SINGLE_SPECIFIER_STRING_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
+TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_vwidth_vspec_##flag_name##_test) {							\
+GENERIC_SINGLE_TEST_VWIDTH_VPREC_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, specifier, collection);									\
+GENERIC_SINGLE_TEST_VWIDTH_VPREC_(TESTS_ONE_SPECIFIER_LORUM, flag, specifier, collection);									\
+}
 /**
  * END SINGLE SPECIFIER IN FORMAT STRING TESTS GENERIC FLAG
  * 
@@ -293,25 +298,103 @@ BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, , nflag, 
 #define BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_(specifier_name, specifier, collection)										\
 BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
 
+//SINGLE_SPECIFIER_STRING
+#define BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_FPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
+
+#define BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_VPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
+
+#define BONUS_SINGLE_SPECIFIER_STRING_VWIDTH_FPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_STRING_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
+
+#define BONUS_SINGLE_SPECIFIER_STRING_VWIDTH_VPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_STRING_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
+
 #define ALL_MANDATORY_TESTS(specifier_name, specifier, collection)														\
 MANDATORY_SINGLE_SPECIFIER_(specifier_name, specifier, collection)													\
 MANDATORY_SPECIFIER_IN_STRING_(specifier_name, specifier, collection)												\
 MANDATORY_SPECIFIERS_IN_STRING_(specifier_name, specifier, collection)
 //MANDATORY_ONLY_SPECIFIERS_IN_STRING_(specifier_name, specifier, GetTestVector())
 
+/**
+ * BONUS_SINGLE_SPECIFIER_TEST_MACROS
+ * 
+ */
+#define BONUS_SINGLE_SPECIFIER_MINUS_FLAG_TESTS(specifier_name, specifier, collection)\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)
+
+#define BONUS_SINGLE_SPECIFIER_PLUS_FLAG_TEST(specifier_name, specifier, collection)\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)
+
+#define BONUS_SINGLE_SPECIFIER_BLANK_FLAG_TEST(specifier_name, specifier, collection)\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)
+
+#define BONUS_SINGLE_SPECIFIER_SHARP_FLAG_TEST(specifier_name, specifier, collection)\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)
+
+#define BONUS_SINGLE_SPECIFIER_ZERO_FLAG_TEST(specifier_name, specifier, collection)\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)							\
+BONUS_SINGLE_SPECIFIER_NWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)							\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)							\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)
+
+#define BONUS_SINGLE_SPECIFIER_NO_FLAG_TEST(specifier_name, specifier, collection)\
+BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_(specifier_name, specifier, collection)												\
+BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_(specifier_name, specifier, collection)												\
+BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_(specifier_name, specifier, collection)												\
+BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_(specifier_name, specifier, collection)												\
+BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_(specifier_name, specifier, collection)												\
+BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_(specifier_name, specifier, collection)
+/**
+ * END BONUS_SINGLE_SPECIFIER_WIDTH_XXX
+ * 
+ */
+
+
+/**
+ * END BONUS_SINGLE_SPECIFIER_PRECISCION_XXX
+ * 
+ */
 #define BONUS_SINGLE_SPECIFIER_WIDTH_TESTS(specifier_name, specifier, collection)\
 BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_(specifier_name, specifier, collection)										\
 BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_(specifier_name, specifier, collection)										\
-BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
-BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "-", mflag, collection)							\
-BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
-BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "+", pflag, collection)							\
-BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
-BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, " ", bflag, collection)							\
-BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
-BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "#", sflag, collection)							\
-BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)							\
-BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, "0", zflag, collection)
+BONUS_SINGLE_SPECIFIER_WIDTH_MINUS_FLAG_TESTS(specifier_name, specifier, collection)							\
+BONUS_SINGLE_SPECIFIER_WIDTH_PLUS_FLAG_TESTS(specifier_name, specifier, collection)							\
+BONUS_SINGLE_SPECIFIER_WIDTH_BLANK_FLAG_TESTS(specifier_name, specifier, collection)							\
+BONUS_SINGLE_SPECIFIER_WIDTH_ZERO_FLAG_TESTS(specifier_name, specifier, collection)							\
 
 #define BONUS_ALL_WIDTH_TESTS(specifier_name, specifier, collection)\
 BONUS_SINGLE_SPECIFIER_WIDTH_TESTS(specifier_name, specifier, collection)
