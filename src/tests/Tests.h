@@ -121,6 +121,17 @@ TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_fwidth
 	}																													\
 }
 
+#define BONUS_SINGLE_SPECIFIER_FWIDTH_VSPEC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
+TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_vwidth_fspec_##flag_name##_test) {							\
+	for (auto val : collection) {																						\
+		for (int p = 0; p < MAX_PREC; p++) {																			\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "1.*" specifier), p, val);												\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "21.*" specifier), p, val);											\
+			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(flag "42.*" specifier), p, val);											\
+		}																												\
+	}																													\
+}
+
 #define BONUS_SINGLE_SPECIFIER_NWIDTH_FSPEC_(specifier_name, specifier, collection)										\
 BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
 
@@ -137,15 +148,7 @@ BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, , nflag, 
 BONUS_SINGLE_SPECIFIER_FWIDTH_FSPEC_FLAG_X_(specifier_name, specifier, , nflag, collection)
 
 #define BONUS_SINGLE_SPECIFIER_FWIDTH_VSPEC_(specifier_name, specifier, collection)										\
-TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_fwidth_vspec_test) {							\
-	for (auto val : collection) {																						\
-		for (int p = 0; p < MAX_PREC; p++) {																			\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER("1.*" specifier), p, val);												\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER("21.*" specifier), p, val);											\
-			TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER("42.*" specifier), p, val);											\
-		}																												\
-	}																													\
-}
+BONUS_SINGLE_SPECIFIER_FWIDTH_VSPEC_FLAG_X_(specifier_name, specifier, , nflag, collection)
 
 #define BONUS_SINGLE_SPECIFIER_VWIDTH_FSPEC_(specifier_name, specifier, collection)										\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_vwidth_fspec_test) {							\
