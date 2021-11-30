@@ -7,7 +7,7 @@
 #include <limits.h>
 
 #define HEX_POLES 0x7F
-// #define DISABLE_CHAR_TEST
+// #define DISABLE_HEX_TEST
 
 #ifdef DISABLE_HEX_TEST
 

@@ -21,7 +21,7 @@
 
 #define TEST_PRINTF GetTestFunction()
 #define CORRECT_PRINTF GetCorrectFunction()
-#define TEST_PRINTF_FUNC(...) EXPECT_TRUE(ComparePrintf(CORRECT_PRINTF, TEST_PRINTF, __VA_ARGS__))
+#define TEST_PRINTF_FUNC(...) ASSERT_TRUE(ComparePrintf(TEST_PRINTF, CORRECT_PRINTF, __VA_ARGS__))
 
 #define MAX_WIDTH 20
 #define MAX_PREC 20
@@ -711,9 +711,11 @@ BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_(specifier_name, specifier, collection)					
 
 
 */
-typedef int (*PrintfFunc_T)(const char *, ...);
+// typedef int (*PrintfFunc_T)(const char *, ...);
+typedef int (*CorrectPrintfFunc_T)(char *, const char *, ...);
+typedef int (*TestPrintfFunc_T)(const char *, ...);
 
-PrintfFunc_T GetTestFunction();
-PrintfFunc_T GetCorrectFunction();
+TestPrintfFunc_T GetTestFunction();
+CorrectPrintfFunc_T GetCorrectFunction();
 
 #endif //MANDATORYTESTS_H

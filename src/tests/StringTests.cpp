@@ -19,6 +19,12 @@ static const std::vector<const char*>& GetTestVector() {
 	return vec;
 }
 
+TEST(str_tests, null_test) {
+	// TEST_PRINTF_FUNC("Hello %s!", 0);
+	// TEST_PRINTF_FUNC("%s %s!", 0, 0);
+	// TEST_PRINTF_FUNC(TESTS_ONLY_SPECIFIER_LORUM("%s"), TESTS_ONLY_SPECIFIER_LORUM_ARG(0));
+}
+
 ALL_MANDATORY_TESTS(str, "s", GetTestVector())
 BONUS_SINGLE_SPECIFIER_NO_FLAG_TEST(str, "s", GetTestVector())
 BONUS_SINGLE_SPECIFIER_MINUS_FLAG_TESTS(str, "s", GetTestVector())

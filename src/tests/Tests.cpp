@@ -9,10 +9,10 @@ extern "C" {
 #include "ft_printf.h"
 }
 
-PrintfFunc_T GetTestFunction() {
+TestPrintfFunc_T GetTestFunction() {
 	return &ft_printf;
 }
 
-PrintfFunc_T GetCorrectFunction() {
-	return &std::printf;
+CorrectPrintfFunc_T GetCorrectFunction() {
+	return &std::sprintf;
 }

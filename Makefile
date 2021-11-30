@@ -8,13 +8,15 @@ DEPENDENCIES_DIR	:= ./Dependencies
 SRC_DIR				:= ./src
 TESTS_DIR			:= $(SRC_DIR)/tests
 OBJ_DIR				:= ./obj
-SRCS				:= $(SRC_DIR)/Tester.cpp
+CSRC				:= $(SRC_DIR)/buffered_writer.c
+SRCS				:= $(SRC_DIR)/Tester.cpp 
 TESTS				:= $(TESTS_DIR)/CharTests.cpp $(TESTS_DIR)/NoSpecifierTests.cpp $(TESTS_DIR)/StringTests.cpp \
 					$(TESTS_DIR)/Tests.cpp $(TESTS_DIR)/SIntTests.cpp $(TESTS_DIR)/UIntTests.cpp $(TESTS_DIR)/HexTests.cpp \
 					$(TESTS_DIR)/PointerTests.cpp
 OBJS				:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+COBJS				:= $(CSRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 TESTS_OBJS			:= $(TESTS:$(TESTS_DIR)/%.cpp=$(OBJ_DIR)/%.o)
-ALL_OBJS			:= $(OBJS) $(TESTS_OBJS)
+ALL_OBJS			:= $(OBJS) $(TESTS_OBJS) $(COBJS)
 
 AIR_TESTER_DIR		:= $(DEPENDENCIES_DIR)/Air-Tester/Air-Tester
 AIR_TESTER_LIB		:= $(AIR_TESTER_DIR)/../bin/Debug/macosx/x86_64/Air-Tester/libAir-Tester.a
@@ -27,7 +29,7 @@ LINK_DEPENDENCIES	:= $(FT_PRINTF_LIB) $(AIR_TESTER_LIB)
 
 INLCUDE_DIRS		:= -I $(FT_PRINTF_DIR)/include -I $(AIR_TESTER_INCLUDE) -I $(FT_PRINTF_DIR)
 
-CXX					:= clang++
+CXX					:= clang
 CC					:= clang
 LINK_CMD			:= clang++
 ALL_CXX_FLAGS		:= -Wall -Wextra -Werror -pedantic -std=c++17 $(INLCUDE_DIRS)
@@ -80,10 +82,20 @@ $(FT_PRINTF_LIB):
 	$(SILENT)make -C $(FT_PRINTF_DIR)
 	$(SILENT)echo Built $(FT_PRINTF_LIB)!
 
+$(OBJ_DIR)/buffered_writer.o: $(SRC_DIR)/buffered_writer.c
+	$(SILENT)mkdir -p $(OBJ_DIR)
+	$(SILENT)$(CC) $(ALL_C_FLAGS) -o $@ -c $<
+	$(SILENT)echo $(notdir $<)
+
 $(OBJS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(SILENT)mkdir -p $(OBJ_DIR)
 	$(SILENT)$(CXX) $(ALL_CXX_FLAGS) -o $@ -c $<
 	$(SILENT)echo $(notdir $<)
+
+# $(OBJS): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+# 	$(SILENT)mkdir -p $(OBJ_DIR)
+# 	$(SILENT)$(CC) $(ALL_C_FLAGS) -o $@ -c $<
+# 	$(SILENT)echo $(notdir $<)
 
 $(TESTS_OBJS): $(OBJ_DIR)/%.o: $(TESTS_DIR)/%.cpp
 	$(SILENT)mkdir -p $(OBJ_DIR)
