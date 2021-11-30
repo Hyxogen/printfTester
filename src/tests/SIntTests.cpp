@@ -7,7 +7,7 @@
 #include <limits>
 
 #define SINT_POLES 0x7F
-#define DISABLE_SINT_TEST
+// #define DISABLE_SINT_TEST
 
 #ifdef DISABLE_SINT_TEST
 
@@ -25,6 +25,8 @@ static const std::vector<int>& GetTestVector() {
 }
 
 ALL_MANDATORY_TESTS(sint, "d", GetTestVector())
+ALL_MANDATORY_TESTS(siint, "i", GetTestVector())
+
 BONUS_SINGLE_SPECIFIER_NO_FLAG_TEST(sint, "d", GetTestVector())
 BONUS_SINGLE_SPECIFIER_PLUS_FLAG_TEST(sint, "d", GetTestVector())
 BONUS_SINGLE_SPECIFIER_MINUS_FLAG_TESTS(sint, "d", GetTestVector())
@@ -45,7 +47,6 @@ BONUS_TWO_SPECIFIER_STRING_BLANK_FLAG_TEST(sint, "d", GetTestVector())
 BONUS_TWO_SPECIFIER_STRING_SHARP_FLAG_TEST(sint, "d", GetTestVector())
 BONUS_TWO_SPECIFIER_STRING_ZERO_FLAG_TEST(sint, "d", GetTestVector())
 
-ALL_MANDATORY_TESTS(siint, "i", GetTestVector())
 BONUS_SINGLE_SPECIFIER_NO_FLAG_TEST(siint, "i", GetTestVector())
 BONUS_SINGLE_SPECIFIER_PLUS_FLAG_TEST(siint, "i", GetTestVector())
 BONUS_SINGLE_SPECIFIER_MINUS_FLAG_TESTS(siint, "i", GetTestVector())
