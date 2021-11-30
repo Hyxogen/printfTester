@@ -20,10 +20,12 @@ LIGHT_PURPLE="\033[1;35m"
 LIGHT_CYAN="\033[1;36m"
 WHITE="\033[1;37m"
 
+RESET="\033[0m"
+
 FT_PRINTF_DIR="../"
 FT_PRINTF_INCLUDE_DIR="${FT_PRINTF_DIR}/include"
 
-WAIT="4"
+WAIT="0"
 
 SetColor() {
 	printf "$1"
@@ -43,7 +45,7 @@ printf "\n"
 SetColor "$YELLOW"
 printf "Building your ft_printf...\n"
 SetColor "$BLUE"
-make -C "$FT_PRINTF_DIR" fclean
+# make -C "$FT_PRINTF_DIR" fclean
 make -C "$FT_PRINTF_DIR"
 SetColor "$YELLOW"
 printf "Done!\n"
@@ -52,4 +54,5 @@ SetColor "$BLUE"
 make distribution
 SetColor "$YELLOW"
 printf "Done!\n"
-./printfTester
+SetColor "$RESET"
+./printfTester 2>deepthought

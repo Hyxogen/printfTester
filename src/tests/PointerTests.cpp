@@ -7,7 +7,7 @@
 #include <limits.h>
 
 #define POINTER_POLES 0x7F
-// #define DISABLE_POINTER_TEST
+#define DISABLE_POINTER_TEST
 
 #ifdef DISABLE_POINTER_TEST
 

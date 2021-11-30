@@ -7,7 +7,7 @@
 #include <limits>
 
 #define SINT_POLES 0x7F
-// #define DISABLE_SINT_TEST
+#define DISABLE_SINT_TEST
 
 #ifdef DISABLE_SINT_TEST
 

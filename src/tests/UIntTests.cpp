@@ -7,9 +7,9 @@
 #include <limits>
 
 #define UINT_POLES 0x7F
-// #define DISABLE_SINT_TEST
+#define DISABLE_UINT_TEST
 
-#ifdef DISABLE_SINT_TEST
+#ifdef DISABLE_UINT_TEST
 
 #else
 static const std::vector<unsigned int>& GetTestVector() {

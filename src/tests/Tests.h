@@ -34,8 +34,6 @@
 TEST(TESTER_GROUP_NAME_(specifier_name), single_##specifier_name##_test) {												\
 	for (auto val : collection) {																						\
     	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(specifier), val);															\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(specifier), val);															\
-    	TEST_PRINTF_FUNC(TESTS_ONE_SPECIFIER(specifier), val);                		            						\
 	}																													\
 }
 
@@ -327,12 +325,20 @@ TEST(TESTER_GROUP_NAME_(bonus##specifier_name), two_string##specifier_name##_fwi
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_TWO_SPECIFIER_LORUM, flag, "42", , specifier, val, val);											\
 	}																													\
 }
+
+#define BONUS_TWO_SPECIFIER_STRING_FWIDTH_NPREC_(specifier_name, specifier, collection)\
+BONUS_TWO_SPECIFIER_STRING_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
+
 //#define GENERIC_SINGLE_TEST_VWIDTH_(format, flag, prec, specifier, collection)
 #define BONUS_TWO_SPECIFIER_STRING_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), two_string##specifier_name##_vwidth_nspec_##flag_name##_test) {			\
 	GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_HELLOWORLD, flag, , specifier, collection);									\
 	GENERIC_TEST_TWO_VWIDTH_(TESTS_TWO_SPECIFIER_LORUM, flag, , specifier, collection);									\
 }
+
+//DEBUG BOOKMARK
+#define BONUS_TWO_SPECIFIER_STRING_VWIDTH_NPREC_(specifier_name, specifier, collection)\
+BONUS_TWO_SPECIFIER_STRING_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
 
 #define BONUS_TWO_SPECIFIER_STRING_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), two_string##specifier_name##_fwidth_fspec_##flag_name##_test) {			\
@@ -419,6 +425,9 @@ BONUS_SINGLE_SPECIFIER_STRING_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, , 
 #define BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_NPREC_(specifier_name, specifier, collection)										\
 BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_NPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
 
+#define BONUS_SINGLE_SPECIFIER_STRING_VWIDTH_NPREC_(specifier_name, specifier, collection)										\
+BONUS_SINGLE_SPECIFIER_STRING_VWIDTH_NPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
+
 #define BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_FPREC_(specifier_name, specifier, collection)										\
 BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, , nflag, collection)
 
@@ -494,6 +503,7 @@ BONUS_SINGLE_SPECIFIER_VWIDTH_VPREC_FLAG_X_(specifier_name, specifier, "0", zfla
 #define BONUS_SINGLE_SPECIFIER_NO_FLAG_TEST(specifier_name, specifier, collection)\
 BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_(specifier_name, specifier, collection)												\
 BONUS_SINGLE_SPECIFIER_FWIDTH_NPREC_(specifier_name, specifier, collection)												\
+BONUS_SINGLE_SPECIFIER_VWIDTH_NPREC_(specifier_name, specifier, collection)												\
 BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_(specifier_name, specifier, collection)												\
 BONUS_SINGLE_SPECIFIER_FWIDTH_VPREC_(specifier_name, specifier, collection)												\
 BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_(specifier_name, specifier, collection)												\

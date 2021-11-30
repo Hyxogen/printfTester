@@ -41,13 +41,23 @@ void DebugPrintValues(int i, Types... ts) {
 template<typename... Types>
 void PrintInfo(const char *format, int testRet, int corrRet, char *testBuffer, char *corrBuffer, Types... ts) {
 	std::cerr << "--------------------------------------------" << std::endl;
-	std::cerr << "Comparison of printf failed" << std::endl;
-	std::cerr << "Format string: \"" << format << "\"" << std::endl;
-	std::cerr << "Return values: your printf:" << testRet << " actual printf:" << corrRet << std::endl;
-	std::cerr << "Your printf result:" << std::endl;
-	std::cerr << testBuffer << std::endl;
-	std::cerr << "Actual printf result:" << std::endl;
-	std::cerr << corrBuffer << std::endl;
+	std::cerr << "Return values: your printf:" << testRet << " actual printf:" << corrRet << std::endl << std::endl;
+	std::cerr << "Format string: \"" << format << "\"" << std::endl << std::endl;
+		std::cerr << "YOUR PRINTF RESULT" << std::endl;
+	std::cerr << '\"' << testBuffer << '\"' << std::endl << std::endl;
+	// for (int i = 0; i < testRet; i++) {
+	// 	std::fprintf(stderr, "%u", (unsigned char) testBuffer[i]);
+	// 	// std::cerr << (unsigned char) testBuffer[0];
+	// }
+	std::cerr << std::endl << std::endl;
+	std::cerr << "ACTUAL PRINTF RESULT" << std::endl;
+	std::cerr << '\"' << corrBuffer << '\"' << std::endl;
+	// for (int i = 0; i < corrRet; i++) {
+	// 	std::fprintf(stderr, "%u", (unsigned char) corrBuffer[i]);
+	// 	// std::cerr << (unsigned char) corrBuffer[0];
+	// }
+	std::cerr << std::endl << std::endl;
+	
 	DebugPrintValues(1, ts...);
 	std::cerr << "--------------------------------------------" << std::endl << std::endl;
 }
@@ -63,9 +73,12 @@ int ComparePrintf(int (*testPrintf)(const char *, ...), int (*corrPrintf)(char *
 		ASSERT((stdout_copy = dup(1)) != -1)
 	}
 
+	std::memset(&testBuffer[0], 11, BUFFER_SIZE + 1);
+	std::memset(&corrBuffer[0], 5, BUFFER_SIZE + 1);
 	corrRet = corrPrintf(&corrBuffer[0], format, ts...);
 	set_internal_buffer(1, &testBuffer[0], BUFFER_SIZE + 1);
 	testRet = testPrintf(format, ts...);
+	write(1, "\0", 1);
 	flush_without_writing(1);
 	if (!std::strncmp(&corrBuffer[0], &testBuffer[0], corrRet) && corrRet == testRet)
 		return (1);
