@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-#define DISABLE_STRING_TEST
+// #define DISABLE_STRING_TEST
 
 #ifdef DISABLE_STRING_TEST
 

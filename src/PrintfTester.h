@@ -73,6 +73,7 @@ int ComparePrintf(int (*testPrintf)(const char *, ...), int (*corrPrintf)(char *
 		ASSERT((stdout_copy = dup(1)) != -1)
 	}
 
+	ASSERT(setvbuf(stdout, NULL, _IONBF, 0) != EOF);
 	std::memset(&testBuffer[0], 11, BUFFER_SIZE + 1);
 	std::memset(&corrBuffer[0], 5, BUFFER_SIZE + 1);
 	corrRet = corrPrintf(&corrBuffer[0], format, ts...);

@@ -24,6 +24,13 @@ static const std::vector<int>& GetTestVector() {
 	return vec;
 }
 
+// TEST(sint_tests, limit_tests) {
+// 	TEST_PRINTF_FUNC("%2147483647d", 0);
+// 	TEST_PRINTF_FUNC("%.2147483647d", 0);
+// 	TEST_PRINTF_FUNC("%2147483647d", 42);
+// 	TEST_PRINTF_FUNC("%.2147483647d", 42);
+// }
+
 ALL_MANDATORY_TESTS(sint, "d", GetTestVector())
 ALL_MANDATORY_TESTS(siint, "i", GetTestVector())
 

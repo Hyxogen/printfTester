@@ -7,7 +7,7 @@
 #include <limits>
 
 #define UINT_POLES 0x7F
-#define DISABLE_UINT_TEST
+// #define DISABLE_UINT_TEST
 
 #ifdef DISABLE_UINT_TEST
 
@@ -26,23 +26,17 @@ static const std::vector<unsigned int>& GetTestVector() {
 
 ALL_MANDATORY_TESTS(uint, "u", GetTestVector())
 BONUS_SINGLE_SPECIFIER_NO_FLAG_TEST(uint, "u", GetTestVector())
-BONUS_SINGLE_SPECIFIER_PLUS_FLAG_TEST(uint, "u", GetTestVector())
 BONUS_SINGLE_SPECIFIER_MINUS_FLAG_TESTS(uint, "u", GetTestVector())
-BONUS_SINGLE_SPECIFIER_BLANK_FLAG_TEST(uint, "u", GetTestVector())
 BONUS_SINGLE_SPECIFIER_SHARP_FLAG_TEST(uint, "u", GetTestVector())
 BONUS_SINGLE_SPECIFIER_ZERO_FLAG_TEST(uint, "u", GetTestVector())
 
 BONUS_SINGLE_SPECIFIER_STRING_NO_FLAG_TEST(uint, "u", GetTestVector())
-BONUS_SINGLE_SPECIFIER_STRING_PLUS_FLAG_TEST(uint, "u", GetTestVector())
 BONUS_SINGLE_SPECIFIER_STRING_MINUS_FLAG_TESTS(uint, "u", GetTestVector())
-BONUS_SINGLE_SPECIFIER_STRING_BLANK_FLAG_TEST(uint, "u", GetTestVector())
 BONUS_SINGLE_SPECIFIER_STRING_SHARP_FLAG_TEST(uint, "u", GetTestVector())
 BONUS_SINGLE_SPECIFIER_STRING_ZERO_FLAG_TEST(uint, "u", GetTestVector())
 
 BONUS_TWO_SPECIFIER_STRING_NO_FLAG_TEST(uint, "u", GetTestVector())
-BONUS_TWO_SPECIFIER_STRING_PLUS_FLAG_TEST(uint, "u", GetTestVector())
 BONUS_TWO_SPECIFIER_STRING_MINUS_FLAG_TESTS(uint, "u", GetTestVector())
-BONUS_TWO_SPECIFIER_STRING_BLANK_FLAG_TEST(uint, "u", GetTestVector())
 BONUS_TWO_SPECIFIER_STRING_SHARP_FLAG_TEST(uint, "u", GetTestVector())
 BONUS_TWO_SPECIFIER_STRING_ZERO_FLAG_TEST(uint, "u", GetTestVector())
 #endif

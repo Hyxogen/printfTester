@@ -6,7 +6,7 @@
 #include <iostream>
 
 #define CHAR_POLES 0x7F
-#define DISABLE_CHAR_TEST
+// #define DISABLE_CHAR_TEST
 
 #ifdef DISABLE_CHAR_TEST
 
