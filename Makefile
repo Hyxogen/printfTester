@@ -10,16 +10,16 @@ TESTS_DIR			:= $(SRC_DIR)/tests
 OBJ_DIR				:= ./obj
 CSRC				:= $(SRC_DIR)/buffered_writer.c
 SRCS				:= $(SRC_DIR)/Tester.cpp 
-TESTS				:= $(TESTS_DIR)/CharTests.cpp $(TESTS_DIR)/NoSpecifierTests.cpp $(TESTS_DIR)/StringTests.cpp \
+TESTS				:= $(TESTS_DIR)/MixedTests.cpp $(TESTS_DIR)/CharTests.cpp $(TESTS_DIR)/NoSpecifierTests.cpp $(TESTS_DIR)/StringTests.cpp \
 					$(TESTS_DIR)/Tests.cpp $(TESTS_DIR)/SIntTests.cpp $(TESTS_DIR)/UIntTests.cpp $(TESTS_DIR)/HexTests.cpp \
-					$(TESTS_DIR)/PointerTests.cpp
+					$(TESTS_DIR)/PointerTests.cpp $(TESTS_DIR)/SpecifierTests.cpp
 OBJS				:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 COBJS				:= $(CSRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 TESTS_OBJS			:= $(TESTS:$(TESTS_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 ALL_OBJS			:= $(OBJS) $(TESTS_OBJS) $(COBJS)
 
 AIR_TESTER_DIR		:= $(DEPENDENCIES_DIR)/Air-Tester/Air-Tester
-AIR_TESTER_LIB		:= $(AIR_TESTER_DIR)/../bin/Debug/macosx/x86_64/Air-Tester/libAir-Tester.a
+AIR_TESTER_LIB		:= $(AIR_TESTER_DIR)/../bin/Distribution/macosx/x86_64/Air-Tester/libAir-Tester.a
 AIR_TESTER_INCLUDE	:= $(AIR_TESTER_DIR)/include
 
 FT_PRINTF_DIR		:= ./..
@@ -46,7 +46,7 @@ C_DEBUG_FLAGS		:= -O0 -g
 
 .PHONY: all distribution release debug clean fclean re
 
-all: debug
+all: distribution
 
 distribution: ALL_CXX_FLAGS += $(CXX_DISTR_FLAGS)
 distribution: ALL_C_FLAGS += $(C_DISTR_FLAGS)
@@ -75,7 +75,7 @@ $(AIR_TESTER_LIB):
 	$(SILENT)git -C $(AIR_TESTER_DIR) pull origin development
 	$(SILENT)echo Setting up Air-Tester...
 	$(SILENT)(cd ./Dependencies/Air-Tester && bash ./setup_files.sh osx)
-	$(SILENT)make -C $(AIR_TESTER_DIR)
+	$(SILENT)make -C $(AIR_TESTER_DIR) config=distribution_osx
 
 $(FT_PRINTF_LIB):
 	$(SILENT)echo Building $(FT_PRINTF_LIB)

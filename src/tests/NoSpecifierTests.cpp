@@ -2,7 +2,7 @@
 #include "../PrintfTester.h"
 #include <AirTester.h>
 
-#define DISABLE_SPECIFIER_TESTS
+// #define DISABLE_SPECIFIER_TESTS
 
 #ifdef DISABLE_SPECIFIER_TESTS
 
