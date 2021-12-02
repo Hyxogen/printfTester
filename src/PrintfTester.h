@@ -19,6 +19,12 @@ extern "C" {
  * mandatory en bonus checks maken voor char string en signed int
  */
 
+
+template<typename... Types>
+void DebugPrintValues(int i, Types... ts) {
+	DebugPrintValues(i, ts...);
+}
+
 template<typename Type>
 void DebugPrintValues(int i, Type t) {
 	std::cerr << "val:" << i << std::endl;
@@ -29,13 +35,11 @@ void DebugPrintValues(int i, Type t) {
 template<typename Type, typename... Types>
 void DebugPrintValues(int i, Type t, Types... ts) {
 	std::cerr << "val:" << i << std::endl;
-	std::cerr << t << std::endl;
+	if (t == 0)
+		std::cerr << 0 << std::endl;
+	else
+		std::cerr << t << std::endl;
 	DebugPrintValues(i + 1, ts...);
-}
-
-template<typename... Types>
-void DebugPrintValues(int i, Types... ts) {
-	DebugPrintValues(i, ts...);
 }
 
 template<typename... Types>
@@ -82,6 +86,8 @@ int ComparePrintf(int (*testPrintf)(const char *, ...), int (*corrPrintf)(char *
 	write(1, "\0", 1);
 	flush_without_writing(1);
 	if (!std::strncmp(&corrBuffer[0], &testBuffer[0], corrRet) && corrRet == testRet)
+		return (1);
+	if (corrRet == -1 && corrRet == testRet)
 		return (1);
 	PrintInfo(format, testRet, corrRet, &testBuffer[0], &corrBuffer[0], ts...);
 	return (0);

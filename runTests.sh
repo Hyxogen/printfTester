@@ -45,7 +45,7 @@ printf "\n"
 SetColor "$YELLOW"
 printf "Building your ft_printf...\n"
 SetColor "$BLUE"
-# make -C "$FT_PRINTF_DIR" fclean
+make -C "$FT_PRINTF_DIR" fclean
 make -C "$FT_PRINTF_DIR"
 SetColor "$YELLOW"
 printf "Done!\n"

@@ -131,6 +131,7 @@ for (auto val : collection) {										\
 #define BONUS_SINGLE_SPECIFIER_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_nwidth_fspec_##flag_name##_test) {			\
 	for (auto val : collection) {																						\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, , ".", specifier, val);										\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, , ".1", specifier, val);										\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, , ".21", specifier, val);											\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, , ".42", specifier, val);                          					\
@@ -159,12 +160,15 @@ TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_vwidth
 #define BONUS_SINGLE_SPECIFIER_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_fwidth_fspec_##flag_name##_test) {			\
 	for (auto val : collection) {																						\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "1", ".", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "1", ".1", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "1", ".21", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "1", ".42", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "21", ".", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "21", ".1", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "21", ".21", specifier, val);							\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "21", ".42", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "42", ".", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "42", ".1", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "42", ".21", specifier, val);							\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER, flag, "42", ".42", specifier, val);							\
@@ -184,6 +188,7 @@ TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_fwidth
 
 #define BONUS_SINGLE_SPECIFIER_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_##specifier_name##_vwidth_fspec_##flag_name##_test) {							\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER, flag, ".", specifier, collection);									\
 GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER, flag, ".1", specifier, collection);									\
 GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER, flag, ".21", specifier, collection);									\
 GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER, flag, ".42", specifier, collection);									\
@@ -205,9 +210,11 @@ GENERIC_SINGLE_TEST_VWIDTH_VPREC_(TESTS_ONE_SPECIFIER, flag, specifier, collecti
 #define BONUS_SINGLE_SPECIFIER_STRING_NWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_nwidth_fspec_##flag_name##_test) {			\
 	for (auto val : collection) {																						\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , ".", specifier, val);										\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , ".1", specifier, val);										\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , ".21", specifier, val);											\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, , ".42", specifier, val);                          					\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, , ".", specifier, val);										\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, , ".1", specifier, val);										\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, , ".21", specifier, val);											\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, , ".42", specifier, val);                          					\
@@ -241,21 +248,27 @@ TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_
 #define BONUS_SINGLE_SPECIFIER_STRING_FWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)				\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_fwidth_fspec_##flag_name##_test) {			\
 	for (auto val : collection) {																						\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", ".", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", ".1", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", ".21", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "1", ".42", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", ".", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", ".1", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", ".21", specifier, val);							\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "21", ".42", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", ".", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", ".1", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", ".21", specifier, val);							\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, "42", ".42", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", ".", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", ".1", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", ".21", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "1", ".42", specifier, val);								\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", ".", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", ".1", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", ".21", specifier, val);							\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "21", ".42", specifier, val);							\
+		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", ".", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", ".1", specifier, val);								\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", ".21", specifier, val);							\
 		GENERIC_SINGLE_TEST_FORMAT_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", ".42", specifier, val);							\
@@ -274,9 +287,11 @@ GENERIC_TEST_SINGLE_VPREC_(TESTS_ONE_SPECIFIER_LORUM, flag, "42", specifier, col
 
 #define BONUS_SINGLE_SPECIFIER_STRING_VWIDTH_FPREC_FLAG_X_(specifier_name, specifier, flag, flag_name, collection)										\
 TEST(TESTER_GROUP_NAME_(bonus##specifier_name), single_string##specifier_name##_vwidth_fspec_##flag_name##_test) {							\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, ".", specifier, collection);									\
 GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, ".1", specifier, collection);									\
 GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, ".21", specifier, collection);									\
 GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_HELLOWORLD, flag, ".42", specifier, collection);									\
+GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_LORUM, flag, ".", specifier, collection);									\
 GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_LORUM, flag, ".1", specifier, collection);									\
 GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_LORUM, flag, ".21", specifier, collection);									\
 GENERIC_SINGLE_TEST_VWIDTH_(TESTS_ONE_SPECIFIER_LORUM, flag, ".42", specifier, collection);									\

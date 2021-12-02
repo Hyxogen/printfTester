@@ -10,7 +10,7 @@ TESTS_DIR			:= $(SRC_DIR)/tests
 OBJ_DIR				:= ./obj
 CSRC				:= $(SRC_DIR)/buffered_writer.c
 SRCS				:= $(SRC_DIR)/Tester.cpp 
-TESTS				:= $(TESTS_DIR)/MixedTests.cpp $(TESTS_DIR)/CharTests.cpp $(TESTS_DIR)/NoSpecifierTests.cpp $(TESTS_DIR)/StringTests.cpp \
+TESTS				:= $(TESTS_DIR)/ErrorTests.cpp $(TESTS_DIR)/MixedTests.cpp $(TESTS_DIR)/CharTests.cpp $(TESTS_DIR)/NoSpecifierTests.cpp $(TESTS_DIR)/StringTests.cpp \
 					$(TESTS_DIR)/Tests.cpp $(TESTS_DIR)/SIntTests.cpp $(TESTS_DIR)/UIntTests.cpp $(TESTS_DIR)/HexTests.cpp \
 					$(TESTS_DIR)/PointerTests.cpp $(TESTS_DIR)/SpecifierTests.cpp
 OBJS				:= $(SRCS:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)

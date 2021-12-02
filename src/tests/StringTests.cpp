@@ -14,7 +14,8 @@ static const std::vector<const char*>& GetTestVector() {
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			"",
 			" ",
-			"asdf"
+			"asdf",
+			0
 	};
 	return vec;
 }
